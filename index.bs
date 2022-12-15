@@ -331,7 +331,7 @@ ex:Ghent a ex:HumanCommunity.
 
 </div>
 
-More test cases can be found at [https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md](https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md) .
+More test cases can be found at [https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md](https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md).
 
 Document Conventions
 =====================
