@@ -1,0 +1,951 @@
+<pre class='metadata'>
+Title: RDF Surfaces Primer
+Level: 1
+Status: LD
+Editor: Patrick Hochstenbach, [KNoWS](https://knows.idlab.ugent.be/team/), patrick.hochstenbach@ugent.be 
+Editor: Jos De Roo, [KNoWS](https://knows.idlab.ugent.be/team/), jos.deroo@ugent.be 
+Abstract: This document specifies a Notation3 sublanguage to express RDF Surfaces.
+Markup Shorthands: markdown yes 
+Logo: images/logo.svg
+Boilerplate: 
+</pre>
+
+<style>
+table {
+  margin: 25px auto;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+  border-bottom: 2px solid #005A9C;
+}
+table tr:hover {
+  background: #f4f4f4;
+}
+table tr:hover td {
+  color: #555;
+}
+table th, table td {
+  color: #999;
+  border: 1px solid #eee;
+  padding: 12px 12px;
+  border-collapse: collapse;
+}
+table th {
+  background: #005A9C;
+  color: #fff;
+}
+table tbody > tr > th {
+  background: #fff;
+  color: #005A9C;
+}
+table th.last {
+  border-right: none;
+}
+</style>
+
+Introduction {#Introduction}
+=====================
+
+<img src="[LOGO]" alt="Logo" width="100" style="float: left; margin: 5px;"/>  
+
+This document presents a [Notation3](https://w3c.github.io/N3/spec/) sublanguage 
+to express a revised RDF logic as envisoned by [Pat Hayes](https://www.ihmc.us/groups/phayes/) in his 2009 ISWC Invited 
+Talk: [BLOGIC](https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk). RDF
+Surfaces logic can be thought as an implementation of [Charles Sanders Peirce](https://en.wikipedia.org/wiki/Charles_Sanders_Peirce)'s 
+[Existential Graphs](http://www.jfsowa.com/peirce/ms514.htm) in RDF.
+
+An RDF surface is a kind of a sheet of paper on which RDF graphs can be written.
+All triples that are part of an RDF graph are then on this sheet of paper, including all
+[[URI]]s, literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
+A sheet of paper can contain more than one RDF graph. An RDF graph can't be split
+over multiple sheets of paper. But, one can copy an RDF graph from one sheet of 
+paper to another sheet of paper.
+
+[Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes) are special. They can't 
+be copied to a new piece of paper. They can be thought of scratches on a piece of 
+paper. These scratches, or graffiti, are engraved into the piece of paper and can't
+be transferred. When copying data with blank nodes onto a new sheet of paper, 
+new scratches need to be made.
+
+<div class=example>
+An empty *positive surface* is a tautology.
+
+<img alt="blank surface" src="images/positive_surface.svg" width="300"/>
+</div>
+
+<div class=example>
+A *positive surface* with one triple `:Gent a :City`, which means *"Ghent is a city"*.
+
+<img alt="blank surface" src="images/one_assertion.svg" width="300"/>
+</div>
+
+<div class=example>
+A *positive surface* with one triple containing a blank node `[] a :City`, which means *"There is something that is a city"*. 
+
+<img alt="blank surface" src="images/blank_node.svg" width="300"/>
+</div>
+
+<div class=example>
+Two *positive surfaces*, one with the triple `[] a :City` (which means *"There is something that is a city"*),
+and another one with the triple `[] a :Cat` (which means *"There is something is a cat"*). 
+
+<img alt="blank surface" src="images/two_sheets.svg" width="600"/>
+
+One can copy these two RDFs graphs to a new surface. This will contain two graphs with 
+two blank nodes:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+
+[] a :City .
+[] a :Cat .
+</pre>
+
+This means, "There is something that is a city AND There is something that is a cat."
+
+<img alt="blank surface" src="images/city_cat.svg" width="300"/>
+</div>
+
+**Positive surface**
+
+There are special sheets of paper that can be interpreted as a logical statement.
+For instance, the sheet of paper in Example 1 is an example of a **positive surface**
+(we use in this document a paper with a black border as a positive surface). Any
+RDF graph written on this surface is interpreted as logical assertion (true). An empty 
+sheet of positive paper is an empty claim and is treated as a logical tautology (true).
+
+When there is there is more than one RDF graph on the surface, then it is a logical conjunction (AND). 
+If we interpret the sheets of paper with the black border in the examples above as
+positive surfaces, then  they express:
+
+- Example 1: true
+- Example 2: It is true that:  Ghent a City.
+- Example 3: It is true that: ∃ x : x  a City
+- Example 4: It is true that: ∃ x , y : ( x a City ) AND ( y a Cat )
+
+The [blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes) need to be interpreted
+as logical existentials on logical paper.
+
+**Negative surface**
+
+In the same way as a *positive surface* asserts a logical truth, a **negative surface**
+asserts a logical negation. The examples below will use a sheet of paper with a red border
+as a negative surface.
+
+An empty *negative surface* expresses a logical contradicton, false. When there are one
+or more RDF graphs written on an *negative* surface they mean the negation of those RDF graphs.
+
+A blank node on a negative surface is interpreted as a logical universal. The reason is 
+that:
+
+```
+NOT(∃ x : P(x)) ⇔ ∀ x : NOT(P(x))
+```
+
+<div class=example>
+An empty *negative surface* is a contradiction.
+
+<img alt="blank surface" src="images/negative_surface.svg" width="300"/>
+</div>
+
+<div class=example>
+A *negative surface* with one triple `:Ghent a :Cat` means *"It is not the case that Ghent is a cat"*.
+
+<img alt="blank surface" src="images/city_not_cat.svg" width="300"/>
+</div>
+
+<div class=example>
+A *negative surface* with one triple `[] a :City` means 
+*"It is not the case that something is a city"* , or *"Nothing is a city"*.
+
+<img alt="blank surface" src="images/nothing_a_city.svg" width="300"/>
+</div>
+
+**Propositional logic**
+
+With combination of conjunction, by putting triples on a *positive surface*, 
+and negation, by putting triples on a *negative surface*, any **compound 
+truth-functional statement** can be symbolized with positive and negative sheets
+of paper:
+
+- The logical conjunction **AND** is given by putting RDF triples on a *positive surface*.
+- The logical negation **NOT** is given by putting RDF triples on a *negative surface*.
+- The logical disjunction **OR** can be made by a combination of *positive* and *negative surfaces*:
+    - `NOT(P AND Q) = NOT(P) OR NOT(Q)`
+    - `NOT( NOT(P) AND NOT(Q)) = P OR Q`
+- The logical implication **→** can be made with a combination of **AND** and **OR**:
+    - `P → Q = NOT(P) OR Q = NOT( P AND NOT(Q) )`
+
+<div class=example>
+Propositional logic using *positive* and *negative* surfaces.
+
+<img alt="blank surface" src="images/propositional_logic.svg" width="500"/>
+</div>
+
+**First-order logic**
+
+First-order logic can be added to the RDF surfaces by interpreting the blank node as 
+an existential and using the rule that a universal can made from an existential by 
+placing it in an enclosing negative surface: 
+
+```
+∀ x : P(x) ⇔ NOT(∃ x : NOT P(x)):
+```
+
+- By placing a blank node on a *positive surface* it is an existential quantifier.
+- By placing a blank node on a *negative surface* it is a universal quantifier.
+
+<div class=example>
+First-order logic using *positive* and *negative* surfaces.
+
+<img alt="blank surface" src="images/first_order_logic.svg" width="500"/>
+</div>
+
+**First-order logic in Notation3**
+
+RDF Surfaces provides a way to express the notion of *positive* and *negative surfaces*
+in Notation3 with help of the built-ins `log:onPositiveSurface` and `log:onNegativeSurface`.
+
+The subject of both built-ins are the blank nodes that need to be put on the 
+surface (so that they become existentials or universals depeding on the type
+of surface). 
+
+<div class=example>
+*"Something is a city"* in Notation3 .
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:X) log:onPositiveSurface {
+    _:X a :City .
+} .
+</pre>
+
+</div>
+
+<div class=example>
+*"Something is a city"* in Notation3 , version 2 : because the default surface 
+is defined as a positive surface.
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+_:X a :City .
+</pre>
+
+</div>
+
+<div class=example>
+*"Nothing is a problem"* in Notation3 .
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:X) log:onNegativeSurface {
+    _:X a :Problem .
+} .
+</pre>
+
+</div>
+
+<div class=example>
+*"All cats are alive OR dead"* in Notation3. These are Schrödinger cats: logical OR can
+mean alive, or dead, or both alive and dead. 
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:X) log:onNegativeSurface {
+    _:X a :Cat .
+
+    () log:onNegativeSurface {
+        _:X :is :Alive .
+    } .
+
+    () log:onNegativeSurface {
+        _:X :is :Dead .
+    } .
+} .
+</pre>
+
+</div>
+
+<div class=example>
+*"If any cat X is alive, then X says meow"* in Notation3 .
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:X) log:onNegativeSurface {
+    _:X a :Cat ;
+        :is :Alive .
+    () log:onNegativeSurface {
+        _:X :says :Meow .
+    } .
+} .
+</pre>
+
+</div>
+
+A surface can be queried by providing a query surface. The results of this 
+query will be the final result of the reasoning engine interpreting the surfaces.
+
+<div class=example>
+
+`:Ghent a :City` is a triple on the implicit positive surface. The two nested
+negative surfaces express that for any subject `_:S` on the positive service
+that is a `:City`, it implies that `_:S` needs be be also a `:HumanCommunity`.
+
+<pre highlight="turtle">
+@prefix ex: &lt;http://example.org/ns#&gt;.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt;.
+
+ex:Ghent a ex:City.
+
+# Every city is a human community
+(_:S) log:onNegativeSurface {
+    _:S a ex:City.
+    () log:onNegativeSurface {
+        _:S a ex:HumanCommunity.
+    }.
+}.
+
+# Query
+(_:S _:C) log:onQuerySurface {
+    _:S a _:C.
+}.
+</pre>
+
+When this surface is executed by a reasoner the result would be:
+
+<pre highlight="turtle">
+@prefix ex: &lt;http://example.org/ns#&gt;.
+
+ex:Ghent a ex:City.
+ex:Ghent a ex:HumanCommunity.
+</pre>
+
+</div>
+
+More test cases can be found at [https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md](https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md) .
+
+Document Conventions
+=====================
+
+Within this document, the following namespace prefix bindings to [[URI]]-s are used: 
+
+<table>
+  <thead>
+    <tr>
+      <th>Prefix
+      <th>Namespace
+  <tbody>
+    <tr>
+      <td>ex
+      <td>http://example.org/ns#
+    <tr>
+      <td>rdf
+      <td>http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    <tr>
+      <td>log
+      <td>http://www.w3.org/2000/10/swap/log#
+    <tr>
+      <td>list
+      <td>http://www.w3.org/2000/10/swap/list#
+    <tr>
+      <td>string
+      <td>http://www.w3.org/2000/10/swap/string#
+</table>
+
+Surface {#Surface}
+==============================
+
+Surfaces are written as triples where the `subject` is a list of zero or more blank nodes. 
+The `object` is a RDF graph or the `true` or `false` literal. The blank nodes in the 
+subject list are treated as marks on the object RDF graph. The `predicate` specifies 
+the kind of surface. Any kind of surface may be used but the following built-in have 
+special semantics:
+
+<table>
+ <thead>
+ <tr>
+  <td>built-in
+  <td>semantics
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+  <td>`log:onPositiveSurface`
+  <td>Positive surfaces claim that an RDF graph on them is true
+ <tr>
+  <td>`log:onNegativeSurface`
+  <td>Negative surfaces claim that an RDF graph on them is false
+ <tr>
+  <td>`log:onNeutralSurface`
+  <td>Neutral surfaces don't claim that the RDF graph on them is true or false
+ <tr>
+  <td>`log:onQuerySurface`
+  <td>Query surfaces use the RDF graph on them as a query
+ </tbody>
+</table>
+
+A surface can contain zero or more other surfaces. These surfaces are then nested.
+Nested surfaces can share the same [[URI]]-s and literals (by copying the data), 
+but can't share blank nodes. Any blank nodes that are written inside a surface 
+(not as subject of an RDF Surface) are to be interpreted as *coreferences* to the
+blank node graffiti defined on a parent RDF Surface. If no such parent RDF Surface
+exists, then it is assumed that the blank node is a coreference to an implicit declared
+blank node graffiti on the default positive surface. 
+
+</div>
+
+<div class=example>
+An `ex:myFirstSurface` is created which contains two triples and a nested surface. The
+blank node in `_:X a ex:OtherStatement` is a coreference to the `_:X` graffiti on 
+`ex:myFirstSurface`. 
+
+In the nested surface `ex:mySecondSurface`, the blank node in `_:X ex:is true` is also a 
+reference to the `_:X` blank node graffiti on `ex:myFirstSurface`. 
+
+The blank node `_:Y` coreference in `ex:mySecondSurface` doesn't refer to a parent blank
+node graffiti. It is assumed that the default positive surface contains that graffiti.
+
+In the nested surface `ex:myThirdSurface`, the blank node in `_:X ex:is false` is a
+coreference to the `_:X` blank node graffiti on `ex:myThirdSurface`. The new graffiti
+shields the `_:X` that was defined on `ex:myFirstSurface`: the scope of `_:X` coreferences is now
+limited to `ex:myThirdSurface`.
+
+<pre highlight="turtle">
+@prefix ex: &lt;http://example.org/ns#&gt; .
+
+(_:X) ex:myFirstSurface {
+
+    ex:Statement1 a ex:NiceStatement .
+    _:X a ex:OtherStatement .
+     
+    () ex:mySecondSurface {
+        _:X ex:is true . 
+        _:Y a ex:AnotherStatement .
+
+        (_:X) ex:myThirdSurface {
+            _:X ex:is false .
+        } .
+    }.
+} .
+</pre>
+
+</div>
+
+## Positive Surface ## {#PositiveSurface}
+
+A positive surface is an RDF graph which claims that an RDF Graph on it is true.
+This is the current default interperation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
+When no surfaces are provided, an implicit positive surface is assumed in the RDF document.
+
+<div class=example>
+The two surfaces below are equal.
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+() log:onPositiveSurface {
+    :Alice a :Person .
+}
+</pre>
+
+and
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+:Alice a :Person .
+</pre>
+
+</div>
+
+The semantics of a positive surface is interpreted as a logical truth:
+
+- An empty positive surface is a tautology 
+- When a triple is placed on a positive surface, then the surface is valid when the triple is true.
+- When two or more triples are placed on a positive surface, then the surface is valid when the logical conjunction of all triples is true.
+
+<div class="example">
+The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
+person that knows Alice". 
+
+As a logical statement:
+
+```
+  :Alice a :Person AND 
+  :Alice :knows :Bob AND (
+    :Bob a :Person AND 
+    :Bob :knows :Alice
+  )
+```
+
+As RDF Surface:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+:Alice a :Person .
+:Alice :knows :Bob .
+
+() log:onPositiveSurface {
+    :Bob a :Person .
+    :Bob :knows :Alice .
+} .
+</pre>
+
+</div>
+
+When a blank node is marked on a positive surface, then it is interpreted as an existential 
+variable in the scope of the positive surface.
+
+<div class="example">
+The surface below should be interpreted as : "Alice is a person and there is a person that
+knows Alice".
+
+As a logical statement:
+
+```
+  :Alice a :Person AND 
+  :Alice :knows :Bob AND (
+    ∃ _:X : _:X a :Person AND 
+            _:X :knows :Alice
+  )
+```
+
+As RDF Surface:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+:Alice a :Person .
+:Alice :knows :Bob .
+
+(_:X) log:onPositiveSurface {
+    _:X a :Person .
+    _:X :knows :Alice .
+} .
+</pre>
+
+</div>
+
+## Negative Surface ## {#NegativeSurface}
+
+A negative surface is an RDF graph which claims that an RDF Graph on it is false. The
+intepretation of the negative surface is the negation of RDF Graph on it. 
+
+The semantics of a negative surface is interpreted as a logical falsehood:
+
+- An empty negative surface is a contradiction.
+- When a triple is placed on a negative surface, then the surface is valid when the triple is false.
+- When two or more triples are placed on a positive surface, then the surface is valid when the logical conjunction of all triples is false.
+
+<div class="example">
+The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is
+not a person that knows Alice".
+
+As a logical statement:
+
+```
+  :Alice a :Person AND 
+  :Alice :knows :Bob AND NOT (
+    :Bob a :Person AND 
+    :Bob :knows :Alice
+  )
+```
+
+As RDF Surface:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+:Alice a :Person .
+:Alice :knows :Bob .
+
+() log:onNegativeSurface {
+    :Bob a :Person .
+    :Bob :knows :Alice .
+} .
+</pre>
+
+</div>
+
+When a blank node is marked on a negative surface, then it should be interpreted as an existential
+variable in the scope of the negative surface. 
+
+<div class="example">
+The surface below should be interpreted as "Alice is a Person and knows Bob 
+and there isn't a person that knows Alice".
+
+As a logical statement:
+
+```
+  :Alice a :Person AND 
+  :Alice :knows :Bob AND NOT (
+    ∃ _:X :
+       _:X a :Person AND 
+       _:X :knows :Alice
+  )
+```
+
+which is the same as:
+
+```
+  :Alice a :Person AND 
+  :Alice :knows :Bob AND 
+    ( ∀ _:X :
+       NOT (
+        _:X a :Person AND 
+        _:X :knows :Alice
+      )
+    ) 
+  )
+```
+
+As RDF Surface:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+:Alice a :Person .
+:Alice :knows :Bob .
+
+(_:X) log:onNegativeSurface {
+    _:X a :Person .
+    _:X :knows :Alice .
+} .
+</pre>
+
+</div>
+
+When two or more negative surfaces are nested in a parent negative surface, then it should
+be interpreted as a logical disjunction.
+
+<div class="example">
+The surface below should be interpreted as "Alice is a Person OR Bob is a Person
+OR Charly is a person".
+
+As a logical statement:
+
+```
+  :Alice a :Person OR
+  :Bob a :Person OR
+  :Charly a :Person 
+```
+
+which is the same as:
+
+```
+  NOT(
+    NOT(:Alice a :Person) AND
+    NOT(:Bob a :Person) AND
+    NOT(:Charly a :Person)
+  )
+```
+
+As RDF Surface:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+:Alice a :Person .
+:Alice :knows :Bob .
+
+() log:onNegativeSurface {
+    () log:onNegativeSurface {
+      :Alice a :Person .
+    } .
+
+    () log:onNegativeSurface {
+      :Bob a :Person .
+    } .
+
+    () log:onNegativeSurface {
+      :Charly a :Person .
+    } .
+}.
+</pre>
+
+</div>
+
+With combinations of AND and NOT other logical truth function can be build. E.g.
+
+- Disjunction: `P ∨ Q` : `NOT( NOT(P) AND NOT(Q))`
+- Material implication `P → Q` : `NOT( P AND NOT Q )` .
+- Converse implication `P ← Q` : `NOT( NOT(P) AND Q )` .
+- Biconditional `(P → Q) ∧ (Q → P)` : `NOT( P AND NOT Q ) AND NOT( Q AND NOT P )`
+
+Negative surfaces should also follow the law of double negation elimination: `P = NOT(NOT(P))`.
+
+## Query Surface ## {#QuerySurface}
+
+A query surface is used to return to external applications a single (positive) RDF Surface
+specified by a graph template. The result is an RDF Surface formed by taking each query 
+solution in the solution sequence, substituting for the variables in the graph template, 
+and combining the triples into a single RDF Surface by set union.
+
+The semantics of a query surface is as follows:
+
+- An empty query surface is an empty template which doesn't match any triple on the default surface.
+- A query surface which contains one or more triples, will expose those triples to external applications when the default surface contains the triples.
+- Blank nodes on a query surface are interpreted as logical universals. Triples using these blank node universals will be exposed to external applications.
+
+<div class="example">
+A query surface that exposes all the triples on the default surface. 
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:S _:P _:O) log:onQuerySurface {
+    _:S _:P _:O .
+} .
+</pre>
+
+The query above is equivalent to the result of a SPARQL query:
+
+<pre highlight="turtle">
+CONSTRUCT {
+    ?S ?P ?O .
+}
+WHERE {
+    ?S ?P ?O .
+}
+</pre>
+
+</div>
+
+<div class="example">
+Return the MyExample surface which only contains one triple:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:S _:P _:O) log:onQuerySurface {
+    () log:onMyExampleSurface {
+        _:S _:P _:O .
+    } .
+} .
+</pre>
+
+The query above is equivalent to the result of a SPARQL query:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+CONSTRUCT {
+    () log:onMyExampleSurface {
+        ?S ?P ?O .
+    } .
+}
+WHERE {
+    () log:onMyExampleSurface {
+        ?S ?P ?O .
+    } .
+}
+</pre>
+
+Return all triples on MyExample surfaces:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:G) log:onQuerySurface {
+    () log:onMyExampleSurface _:G .
+} .
+</pre>
+
+</div>
+
+<div class="example">
+Return all negative surfaces (without blank node graffiti) which contain one single triple about `http://example.org/ns#Alice`.
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:P _:O) log:onQuerySurface {
+    () log:onNegativeSurface {
+        :Alice _:P _:O .
+    } .
+} .
+</pre>
+
+</div>
+
+## Construct Surface ## {#ConstructSurface}
+
+Issue: TODO
+
+## Neutral Surface ## {#NeutralSurface}
+
+A neutral surface makes no claims at all about the graphs written on it. Neutral surfaces can be used, for instance,
+to store information about RDF Collections. Triples on a neutral surface will not be "executed" 
+in any way by a reasoner. Unless, the triples are copied to a positive or negative surface. 
+
+Nesting a neutral surface in another neutral surface will create a nesting of two surfaces.
+
+Writing blank node graffiti on a neutral surface doesn't have specific semantic meaning.
+
+<div class="example">
+The surface below contains on the (default) positive surface factual information about
+`http://example.org/ns#Alice` and `http://example.org/ns#Bob` and two books:
+`http://example.org/ns#Book1` and `http://example.org/ns#Book2`. The positive surface
+also contains structural information to group Books and Authors in an arbitrary author and
+book list.
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+@prefix ldp: &lt;http://www.w3.org/ns/ldp#&gt; .
+
+:Alice a :Person , :BookerPrizeWinner ;
+  :name "Alice" .
+
+:Bob a :Person ;
+  :name "Bob" .
+
+:Book1 a :Book ;
+  :title "Learn RDF in 21 days" ;
+  :author :Alice .
+
+:Book2 a :Book ;
+  :title "The RDF Surface programming language" ;
+  :author :Bob .
+
+() log:onNeutralSurface {
+  :BookList1 a ldp:Container ;
+    ldp:contains :Book1 , :Book2 .
+
+  :AuthorList1 a ldp:Container ;
+    ldp:contains :Alice , :Bob .   
+} .
+</pre>
+</div>
+
+<div class="example">
+The neutral surface in example 26 can still be queried using a query surface. In the
+example query below, using the Notation3 [log:include built-in](https://w3c.github.io/N3/spec/#builtins), we will match:
+
+- All neutral surfaces,
+- ..which include an `ldp:Container` with `ldp:members`,
+- ..each member needs to be a `http://example.org/ns#Book`,
+- ..for each book we match all triples
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+@prefix ldp: &lt;http://www.w3.org/ns/ldp#&gt; .
+
+(_:Graph _:List _:Member) log:onNegativeSurface {
+    () log:onNeutralSurface _:Graph .
+    _:Graph log:includes {
+        _:List a ldp:Container ;
+            ldp:contains _:Member . 
+    } .
+    () log:onNegativeSurface {
+        (_:P _:O) log:onQuerySurface {
+            _:Member a :Book ;
+                _:P _:O .
+        } .
+    } .
+} .
+</pre>
+
+The result of this query should include:
+
+<pre highlight="turtle">
+:Book1 a :Book.
+:Book1 :title "Learn RDF in 21 days".
+:Book1 :author :Alice.
+
+:Book2 a :Book.
+:Book2 :title "The RDF Surface programming language".
+:Book2 :author :Bob.
+</pre>
+
+To execute this query we created a postive surface containing the following logical statement:
+
+```
+∀ Graph, List , Member : 
+  (
+    () log:onNeutralSurface Graph AND
+
+    Graph log:includes {
+        List a ldp:Container AND
+        List ldp:contains Member  
+    }
+  ) 
+  IMPLIES 
+  (
+    ∀ P,O : query({
+        Member a Book AND
+        Membep P O
+    })
+  ) 
+```
+
+We selected first the part of the neutral surface we are interested in and then executed a query over it.
+
+</div>
+
+## Other Surfaces ## {#OtherSurface}
+
+Issue: TODO
+
+## Blank nodes ## {#BlankNodes}
+
+Issue: TODO
+
+Fuse {#Fuse}
+============
+
+Issue: TODO
+
+RDF Star annotations {#RDF Star}
+================
+
+Issue: TODO
+
+Coherent logic {#CoherentLogic}
+================
+
+Issue: TODO
+
+Examples {#Examples}
+================
+
+Issue: TODO
+
+<pre class=biblio>
+{
+	"N3": {
+		"authors": [
+			"Dörthe Arndt",
+			"William Van Woensel",
+			"Dominik Tomaszuk" ,
+            "Gregg Kellogg"
+		],
+		"href": "https://w3c.github.io/N3/spec/",
+		"title": "Notation3",
+		"status": "Draft Community Group Report"
+	}
+}
+</pre>
