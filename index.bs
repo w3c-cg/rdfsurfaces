@@ -206,7 +206,7 @@ RDF Surfaces provides a way to express the notion of *positive* and *negative su
 in Notation3 with help of the built-ins `log:onPositiveSurface` and `log:onNegativeSurface`.
 
 The subject of both built-ins are the blank nodes that need to be put on the 
-surface (so that they become existentials or universals depeding on the type
+surface (so that they become existentials or universals depending on the type
 of surface). 
 
 <div class=example>
