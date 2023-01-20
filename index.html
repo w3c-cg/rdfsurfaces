@@ -1487,7 +1487,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 26e85e599, updated Thu Dec 8 15:29:31 2022 -0800" name="generator">
+  <meta content="Bikeshed version d6f2d6445, updated Tue Jan 17 11:25:25 2023 -0800" name="generator">
 <style>
 table {
   margin: 25px auto;
@@ -2046,7 +2046,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">RDF Surfaces Primer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2022-12-20">20 December 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-01-20">20 January 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -2059,7 +2059,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 20 December 2022,
+In addition, as of 20 January 2023,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2162,13 +2162,13 @@ positive surfaces, then  they express:</p>
      <p>Example 4: It is true that: ∃ x , y : ( x a City ) AND ( y a Cat )</p>
    </ul>
    <p>The <a href="https://www.w3.org/TR/rdf11-mt/#blank-nodes">blank nodes</a> need to be interpreted
-as logical existentials on logical paper.</p>
+as existential quantified variables on logical paper.</p>
    <p><strong>Negative surface</strong></p>
    <p>In the same way as a <em>positive surface</em> asserts a logical truth, a <strong>negative surface</strong> asserts a logical negation. The examples below will use a sheet of paper with a red border
 as a negative surface.</p>
    <p>An empty <em>negative surface</em> expresses a logical contradicton, false. When there are one
 or more RDF graphs written on an <em>negative</em> surface they mean the negation of those RDF graphs.</p>
-   <p>A blank node on a negative surface is interpreted as a logical universal. The reason is
+   <p>A blank node on a negative surface is interpreted as a universal quantified variable. The reason is
 that:</p>
 <pre>NOT(∃ x : P(x)) ⇔ ∀ x : NOT(P(x))
 </pre>
@@ -2215,15 +2215,15 @@ of paper:</p>
    </div>
    <p><strong>First-order logic</strong></p>
    <p>First-order logic can be added to the RDF surfaces by interpreting the blank node as
-an existential and using the rule that a universal can made from an existential by 
-placing it in an enclosing negative surface:</p>
+an existential quantified variable and using the rule that a universal quantified variable can made from an 
+existential quantified variable by placing it in an enclosing negative surface:</p>
 <pre>∀ x : P(x) ⇔ NOT(∃ x : NOT P(x)):
 </pre>
    <ul>
     <li data-md>
-     <p>By placing a blank node on a <em>positive surface</em> it is an existential quantifier.</p>
+     <p>A blank node on a <em>positive surface</em> references an existential quantified variable.</p>
     <li data-md>
-     <p>By placing a blank node on a <em>negative surface</em> it is a universal quantifier.</p>
+     <p>A blank node on a <em>negative surface</em> references a universal quantified variable.</p>
    </ul>
    <div class="example" id="example-a0c6b17c">
     <a class="self-link" href="#example-a0c6b17c"></a> First-order logic using <em>positive</em> and <em>negative</em> surfaces. 
@@ -2232,7 +2232,7 @@ placing it in an enclosing negative surface:</p>
    <p><strong>First-order logic in Notation3</strong></p>
    <p>RDF Surfaces provides a way to express the notion of <em>positive</em> and <em>negative surfaces</em> in Notation3 with help of the built-ins <code>log:onPositiveSurface</code> and <code>log:onNegativeSurface</code>.</p>
    <p>The subject of both built-ins are the blank nodes that need to be put on the
-surface (so that they become existentials or universals depending on the type
+surface (so that they become existential or universal quantified variables depending on the type
 of surface).</p>
    <div class="example" id="example-42571ee9">
     <a class="self-link" href="#example-42571ee9"></a> <em>"Something is a city"</em> in Notation3 . 
@@ -2527,7 +2527,7 @@ not a person that knows Alice".
 </pre>
    </div>
    <p>When a blank node is marked on a negative surface, then it should be interpreted as an existential
-variable in the scope of the negative surface.</p>
+quantified variable in the scope of the negative surface.</p>
    <div class="example" id="example-0b36aace">
     <a class="self-link" href="#example-0b36aace"></a> The surface below should be interpreted as "Alice is a Person and knows Bob 
 and there isn’t a person that knows Alice". 
@@ -2626,7 +2626,7 @@ and combining the triples into a single RDF Surface by set union.</p>
     <li data-md>
      <p>A query surface which contains one or more triples, will expose those triples to external applications when the default surface contains the triples.</p>
     <li data-md>
-     <p>Blank nodes on a query surface are interpreted as logical universals. Triples using these blank node universals will be exposed to external applications.</p>
+     <p>Blank nodes on a query surface are interpreted as universal quantified variables. Triples using these blank node universal quantified variables will be exposed to external applications.</p>
    </ul>
    <div class="example" id="example-06abf4da">
     <a class="self-link" href="#example-06abf4da"></a> A query surface that exposes all the triples on the default surface. 

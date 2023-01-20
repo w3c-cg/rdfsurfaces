@@ -123,7 +123,7 @@ positive surfaces, then  they express:
 - Example 4: It is true that: ∃ x , y : ( x a City ) AND ( y a Cat )
 
 The [blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes) need to be interpreted
-as logical existentials on logical paper.
+as existential quantified variables on logical paper.
 
 **Negative surface**
 
@@ -134,7 +134,7 @@ as a negative surface.
 An empty *negative surface* expresses a logical contradicton, false. When there are one
 or more RDF graphs written on an *negative* surface they mean the negation of those RDF graphs.
 
-A blank node on a negative surface is interpreted as a logical universal. The reason is 
+A blank node on a negative surface is interpreted as a universal quantified variable. The reason is 
 that:
 
 ```
@@ -184,15 +184,15 @@ Propositional logic using *positive* and *negative* surfaces.
 **First-order logic**
 
 First-order logic can be added to the RDF surfaces by interpreting the blank node as 
-an existential and using the rule that a universal can made from an existential by 
-placing it in an enclosing negative surface: 
+an existential quantified variable and using the rule that a universal quantified variable can made from an 
+existential quantified variable by placing it in an enclosing negative surface: 
 
 ```
 ∀ x : P(x) ⇔ NOT(∃ x : NOT P(x)):
 ```
 
-- By placing a blank node on a *positive surface* it is an existential quantifier.
-- By placing a blank node on a *negative surface* it is a universal quantifier.
+- A blank node on a *positive surface* references an existential quantified variable.
+- A blank node on a *negative surface* references a universal quantified variable.
 
 <div class=example>
 First-order logic using *positive* and *negative* surfaces.
@@ -206,7 +206,7 @@ RDF Surfaces provides a way to express the notion of *positive* and *negative su
 in Notation3 with help of the built-ins `log:onPositiveSurface` and `log:onNegativeSurface`.
 
 The subject of both built-ins are the blank nodes that need to be put on the 
-surface (so that they become existentials or universals depending on the type
+surface (so that they become existential or universal quantified variables depending on the type
 of surface). 
 
 <div class=example>
@@ -583,7 +583,7 @@ As RDF Surface:
 </div>
 
 When a blank node is marked on a negative surface, then it should be interpreted as an existential
-variable in the scope of the negative surface. 
+quantified variable in the scope of the negative surface. 
 
 <div class="example">
 The surface below should be interpreted as "Alice is a Person and knows Bob 
@@ -702,7 +702,7 @@ The semantics of a query surface is as follows:
 
 - An empty query surface is an empty template which doesn't match any triple on the default surface.
 - A query surface which contains one or more triples, will expose those triples to external applications when the default surface contains the triples.
-- Blank nodes on a query surface are interpreted as logical universals. Triples using these blank node universals will be exposed to external applications.
+- Blank nodes on a query surface are interpreted as universal quantified variables. Triples using these blank node universal quantified variables will be exposed to external applications.
 
 <div class="example">
 A query surface that exposes all the triples on the default surface. 
