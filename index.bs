@@ -790,10 +790,6 @@ Return all negative surfaces (without blank node graffiti) which contain one sin
 
 </div>
 
-## Construct Surface ## {#ConstructSurface}
-
-Issue: TODO
-
 ## Neutral Surface ## {#NeutralSurface}
 
 A neutral surface makes no claims at all about the graphs written on it. Neutral surfaces can be used, for instance,
