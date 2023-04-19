@@ -915,7 +915,7 @@ Fuse {#Fuse}
 
 Issue: TODO
 
-RDF Star annotations {#RDF Star}
+RDF 1.2 annotations {#RDF Star}
 ================
 
 Issue: TODO
@@ -936,8 +936,8 @@ Issue: TODO
 		"authors": [
 			"Dörthe Arndt",
 			"William Van Woensel",
-			"Dominik Tomaszuk" ,
-            "Gregg Kellogg"
+			"Dominik Tomaszuk",
+            		"Gregg Kellogg"
 		],
 		"href": "https://w3c.github.io/N3/spec/",
 		"title": "Notation3",
