@@ -915,16 +915,6 @@ Fuse {#Fuse}
 
 Issue: TODO
 
-RDF 1.2 annotations {#RDF Star}
-================
-
-Issue: TODO
-
-Coherent logic {#CoherentLogic}
-================
-
-Issue: TODO
-
 Examples {#Examples}
 ================
 
