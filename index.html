@@ -2670,8 +2670,8 @@ concluded from the default positive surface.</p>
     <li data-md>
      <p>Blank nodes on a query surface are interpreted as universal quantified variables.</p>
    </ul>
-   <div class="example" id="example-c7265568">
-    <a class="self-link" href="#example-c7265568"></a> A query surface that exposes all the triples on the default surface, plus all its entailments. 
+   <div class="example" id="example-1d6524d9">
+    <a class="self-link" href="#example-1d6524d9"></a> A query surface that exposes all the triples on the default surface, plus all its entailments. 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
@@ -2679,7 +2679,7 @@ concluded from the default positive surface.</p>
     _<c- p>:</c-><c- f>S</c-> _<c- p>:</c-><c- f>P</c-> _<c- p>:</c-><c- f>O</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
-    <p>The query above is mimics the result of a SPARQL query (except for the added entailments):</p>
+    <p>The query above mimics the result of a SPARQL query (except for the added entailments):</p>
 <pre class="highlight">CONSTRUCT <c- p>{</c->
     ?S ?P ?O <c- p>.</c->
 <c- p>}</c->
@@ -2688,8 +2688,8 @@ WHERE <c- p>{</c->
 <c- p>}</c->
 </pre>
    </div>
-   <div class="example" id="example-0423ed61">
-    <a class="self-link" href="#example-0423ed61"></a> Return the MyExample surface which only contains one triple: 
+   <div class="example" id="example-9871bc92">
+    <a class="self-link" href="#example-9871bc92"></a> Return the MyExample surface which only contains one triple: 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
@@ -2699,7 +2699,7 @@ WHERE <c- p>{</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
-    <p>The query above is mimics to the result of a SPARQL query (except for the added entailments):</p>
+    <p>The query above mimics the result of a SPARQL query (except for the added entailments):</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 

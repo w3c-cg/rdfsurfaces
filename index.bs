@@ -777,7 +777,7 @@ A query surface that exposes all the triples on the default surface, plus all it
 } .
 </pre>
 
-The query above is mimics the result of a SPARQL query (except for the added entailments):
+The query above mimics the result of a SPARQL query (except for the added entailments):
 
 <pre highlight="turtle">
 CONSTRUCT {
@@ -804,7 +804,7 @@ Return the MyExample surface which only contains one triple:
 } .
 </pre>
 
-The query above is mimics to the result of a SPARQL query (except for the added entailments):
+The query above mimics the result of a SPARQL query (except for the added entailments):
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
