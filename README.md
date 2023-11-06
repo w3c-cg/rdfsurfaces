@@ -9,4 +9,4 @@ See the living document [RDF Surfaces Primer](https://w3c-cg.github.io/rdfsurfac
 ### Examples and Test Cases
 
 - https://github.com/eyereasoner/Notation3-By-Example/tree/main/blogic
-- https://github.com/eyereasoner/eye/tree/master/reasoning/blogic
+- https://github.com/eyereasoner/eye/tree/91ec10b3eb850269c5a84451efc99c3874907774/reasoning/blogic
