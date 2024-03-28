@@ -9,8 +9,4 @@ See the living document [RDF Surfaces Primer](https://w3c-cg.github.io/rdfsurfac
 ### Examples and Test Cases
 
 - https://github.com/eyereasoner/Notation3-By-Example/tree/main/blogic
-- https://github.com/eyereasoner/eye/tree/b81e05163e21e93e9fc0ab27c369af7f98a16658/reasoning/blogic
-
-### Example using alternative RDF TriG syntax
-
-- https://github.com/eyereasoner/see-lingua/blob/main/lingua/blogic.trig
+- https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces
