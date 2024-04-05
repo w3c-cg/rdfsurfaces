@@ -205,21 +205,22 @@ First-order logic using *positive* and *negative* surfaces.
 **First-order logic in Notation3**
 
 RDF Surfaces provides a way to express the notion of *positive* and *negative surfaces*
-in Notation3 with help of the built-ins `log:onPositiveSurface` and `log:onNegativeSurface`.
+in Notation3 with help of the built-in `log:nand`. The `log:nand` built-in is equivalent to the logical NAND function ("not and"). A `log:nand` is true when at least one of the nested triples in the object is false. A *positive* surface can be constructed from double nested `log:nand` built-in. A *negative* surface can be constructed from a single `log:nand` built-in.
 
 The subject of both built-ins are the blank nodes that need to be put on the 
-surface (so that they become existential or universal quantified variables depending on the type
-of surface). 
+surface (so that they become existential or universal quantified variables depending on the nesting level of the surface). 
 
 <div class=example>
-*"Something is a city"* in Notation3 .
+*"Something is a city"* in Notation3. 
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onPositiveSurface {
+() log:nand {
+  (_:X) log:nand {
     _:X a :City .
+  }
 } .
 </pre>
 
@@ -239,13 +240,29 @@ _:X a :City .
 </div>
 
 <div class=example>
+*"Everything is a city"* in Notation3. Notice how we can make universal or existential quantified variables by placing blank nodes on a odd or even nested surface.
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:X) log:nand {
+  () log:nand {
+    _:X a :City .
+  }
+} .
+</pre>
+
+</div>
+
+<div class=example>
 *"Nothing is a problem"* in Notation3 .
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+(_:X) log:nand {
     _:X a :Problem .
 } .
 </pre>
@@ -260,14 +277,14 @@ mean alive, or dead, or both alive and dead.
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+(_:X) log:nand {
     _:X a :Cat .
 
-    () log:onNegativeSurface {
+    () log:nand {
         _:X :is :Alive .
     } .
 
-    () log:onNegativeSurface {
+    () log:nand {
         _:X :is :Dead .
     } .
 } .
@@ -282,10 +299,10 @@ mean alive, or dead, or both alive and dead.
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+(_:X) log:nand {
     _:X a :Cat ;
         :is :Alive .
-    () log:onNegativeSurface {
+    () log:nand {
         _:X :says :Meow .
     } .
 } .
@@ -293,8 +310,7 @@ mean alive, or dead, or both alive and dead.
 
 </div>
 
-A surface can be queried by providing a query surface. The results of this 
-query will be the final result of the reasoning engine interpreting the surfaces.
+A surface can be queried by providing a query surface with the `log:nans` ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.
 
 <div class=example>
 
@@ -309,16 +325,19 @@ that is a `:City`, it implies that `_:S` needs be be also a `:HumanCommunity`.
 ex:Ghent a ex:City.
 
 # Every city is a human community
-(_:S) log:onNegativeSurface {
+(_:S) log:nand {
     _:S a ex:City.
-    () log:onNegativeSurface {
+    () log:nand {
         _:S a ex:HumanCommunity.
     }.
 }.
 
 # Query
-(_:S _:C) log:onQuerySurface {
+(_:S _:C) log:nand {
     _:S a _:C.
+    () log:nans {
+      _:S a _:C.
+    } .
 }.
 </pre>
 
@@ -333,7 +352,7 @@ ex:Ghent a ex:HumanCommunity.
 
 </div>
 
-More test cases can be found at [https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md](https://github.com/w3c-cg/rdfsurfaces/blob/master/etc.md).
+More test cases can be found at [https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests).
 
 Document Conventions
 =====================
@@ -381,17 +400,8 @@ special semantics:
  </thead>
  <tbody>
  <tr>
-  <td>`log:onPositiveSurface`
-  <td>Positive surfaces claim that an RDF graph on them is true
- <tr>
-  <td>`log:onNegativeSurface`
-  <td>Negative surfaces claim that an RDF graph on them is false
- <tr>
-  <td>`log:onNeutralSurface`
-  <td>Neutral surfaces don't claim that the RDF graph on them is true or false
- <tr>
-  <td>`log:onQuerySurface`
-  <td>Query surfaces use the RDF graph on them as a query
+  <td>`log:nand`
+  <td>Negative surface claim that any RDF graph in the object position is false.
  </tbody>
 </table>
 
@@ -407,19 +417,16 @@ blank node graffiti on the default positive surface.
 
 <div class=example>
 An `ex:myFirstSurface` is created which contains two triples and a nested surface. The
-blank node in `_:X a ex:OtherStatement` is a coreference to the `_:X` graffiti on 
+blank node in `_:X a ex:OtherStatement` is a co-reference to the `_:X` graffiti on 
 `ex:myFirstSurface`. 
 
 In the nested surface `ex:mySecondSurface`, the blank node in `_:X ex:is true` is also a 
 reference to the `_:X` blank node graffiti on `ex:myFirstSurface`. 
 
-The blank node `_:Y` coreference in `ex:mySecondSurface` doesn't refer to a parent blank
+The blank node `_:Y` co-reference in `ex:mySecondSurface` doesn't refer to a parent blank
 node graffiti. It is assumed that the default positive surface contains that graffiti.
 
-In the nested surface `ex:myThirdSurface`, the blank node in `_:X ex:is false` is a
-coreference to the `_:X` blank node graffiti on `ex:myThirdSurface`. The new graffiti
-shields the `_:X` that was defined on `ex:myFirstSurface`: the scope of `_:X` coreferences is now
-limited to `ex:myThirdSurface`.
+In the nested surface `ex:myThirdSurface`, the blank node in `_:X ex:is false` is a co-reference to the `_:X` blank node graffiti on `ex:myThirdSurface`. The new graffiti shields the `_:X` that was defined on `ex:myFirstSurface`: the scope of `_:X` co-references is now limited to `ex:myThirdSurface`.
 
 <pre highlight="turtle">
 @prefix ex: &lt;http://example.org/ns#&gt; .
@@ -449,24 +456,26 @@ This is the current default interperation of [RDF Semantics](https://www.w3.org/
 When no surfaces are provided, an implicit positive surface is assumed in the RDF document.
 
 <div class=example>
-The two surfaces below are equal.
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-
-() log:onPositiveSurface {
-    :Alice a :Person .
-}
-</pre>
-
-and
+The two surfaces below are equal (because a double negation of a statement is the same as claiming the statement is true: positive):
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
 :Alice a :Person .
+</pre>
+
+and 
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+() log:nand {
+  () log:nand {
+    :Alice a :Person .
+  } .
+}
 </pre>
 
 </div>
@@ -500,26 +509,34 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-() log:onPositiveSurface {
+() log:nand {
+  () log:nand {
     :Bob a :Person .
     :Bob :knows :Alice .
+  } .
 } .
 </pre>
 
 </div>
 
-When a blank node is marked on a positive surface, then it is interpreted as an existential 
-variable in the scope of the positive surface.
+When a blank node is marked on an even nested negative surface, then it is interpreted as an existential quantified variable in the scope of the nested surface.
 
 <div class="example">
-The surface below should be interpreted as : "There is a person that
-knows Alice".
+The surface below should be interpreted as : "There is a person that knows Alice".
 
 As a logical statement:
 
 ```
-    ∃ _:X : _:X a :Person AND _:X :knows :Alice
+∃ _:X : _:X a :Person AND _:X :knows :Alice
 ```
+
+Or, rewritten using NAND-s:
+
+```
+NAND( NAND(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
+```
+
+We make use of the logical rule that a NAND of a NAND cancels and created a positive statement.
 
 As RDF Surface:
 
@@ -527,16 +544,17 @@ As RDF Surface:
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onPositiveSurface {
+() log:nand {
+  (_:X) log:nand {
     _:X a :Person .
     _:X :knows :Alice .
+  } .
 } .
 </pre>
 
 </div>
 
-In RDF Surfaces an default positive surface is implicitly assumed for each RDF document. On this default positive surface all 
-existential variables are implicitly quantified. Example 19 can be rewritten as:
+In RDF Surfaces an default positive surface is implicitly assumed for each RDF document. On this default positive surface all existential variables are implicitly quantified. Example 20 can be rewritten as:
 
 <div class="example">
 A default positive surface with an implicit `_:X` existential variable.
@@ -551,8 +569,40 @@ _:X :knows :Alice .
 
 </div>
 
-Note: The use of a positive surface is deprecated and will be removed from future versions of the RDF Surface Primer.
-A deeply nested positive surface is syntactic sugar for a double nested negative surface. 
+When a blank node is marked on an odd nested negative surface, then it is interpreted as an universal quantified variable in the scope of the nested surface.
+
+<div class="example">
+The surface below should be interpreted as : "Every person knows Alice".
+
+As a logical statement:
+
+```
+∀ _:X : _:X a :Person AND _:X :knows :Alice
+```
+
+Or, rewritten using NAND-s:
+
+```
+NAND( ∃ _:X : NAND(_:X a :Person AND _:X :knows :Alice) )
+```
+
+We make here use of the local rule that `NAND( ∃ _:X ... )` is equal to `∀ _:X NAND( ...)`.
+
+As RDF Surface:
+
+<pre highlight="turtle">
+@prefix : &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
+
+(_:X) log:nand {
+  () log:nand {
+    _:X a :Person .
+    _:X :knows :Alice .
+  } .
+} .
+</pre>
+
+</div>
 
 ## Negative Surface ## {#NegativeSurface}
 
@@ -588,7 +638,7 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-() log:onNegativeSurface {
+() log:nand {
     :Bob a :Person .
     :Bob :knows :Alice .
 } .
@@ -637,7 +687,7 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-(_:X) log:onNegativeSurface {
+(_:X) log:nand {
     _:X a :Person .
     _:X :knows :Alice .
 } .
@@ -679,16 +729,16 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-() log:onNegativeSurface {
-    () log:onNegativeSurface {
+() log:nand {
+    () log:nand {
       :Alice a :Person .
     } .
 
-    () log:onNegativeSurface {
+    () log:nand {
       :Bob a :Person .
     } .
 
-    () log:onNegativeSurface {
+    () log:nand {
       :Charly a :Person .
     } .
 }.
@@ -705,159 +755,9 @@ With combinations of AND and NOT other logical truth function can be build. E.g.
 
 Negative surfaces should also follow the law of double negation elimination: `P = NOT(NOT(P))`.
 
-## Neutral Surface ## {#NeutralSurface}
-
-A neutral surface makes no claims at all about the graphs written on it. Neutral surfaces can be used, for instance,
-to store information about RDF Collections. Triples on a neutral surface will not be "executed" 
-in any way by a reasoner. Unless, the triples are copied to a positive or negative surface. 
-
-Nesting a neutral surface in another neutral surface will create a nesting of two surfaces.
-
-Writing blank node graffiti on a neutral surface doesn't have specific semantic meaning.
-
-<div class="example">
-The surface below contains on the (default) positive surface factual information about
-`http://example.org/ns#Alice` and `http://example.org/ns#Bob` and two books:
-`http://example.org/ns#Book1` and `http://example.org/ns#Book2`. The positive surface
-also contains structural information to group Books and Authors in an arbitrary author and
-book list.
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-@prefix ldp: &lt;http://www.w3.org/ns/ldp#&gt; .
-
-:Alice a :Person , :BookerPrizeWinner ;
-  :name "Alice" .
-
-:Bob a :Person ;
-  :name "Bob" .
-
-:Book1 a :Book ;
-  :title "Learn RDF in 21 days" ;
-  :author :Alice .
-
-:Book2 a :Book ;
-  :title "The RDF Surface programming language" ;
-  :author :Bob .
-
-() log:onNeutralSurface {
-  :BookList1 a ldp:Container ;
-    ldp:contains :Book1 , :Book2 .
-
-  :AuthorList1 a ldp:Container ;
-    ldp:contains :Alice , :Bob .   
-} .
-</pre>
-</div>
-
-## Query Surface ## {#QuerySurface}
-
-A query surface is used to return to external applications a single (positive) RDF Surface
-specified by a graph template. The result is an RDF Surface formed by taking each query 
-solution in the solution sequence, substituting for the variables in the graph template, 
-and combining the triples into a single RDF Surface by set union.
-
-The semantics of a query surface is as follows:
-
-- An empty query surface is an empty template which doesn't match any triple on the default surface.
-- A query surface which contains one or more triples, the triples will create a basic graph pattern that will be matched against all entailments that can be
-concluded from the default positive surface.
-- Blank nodes on a query surface are interpreted as universal quantified variables. 
-
-<div class="example">
-A query surface that exposes all the triples on the default surface, plus all its entailments. 
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-
-(_:S _:P _:O) log:onQuerySurface {
-    _:S _:P _:O .
-} .
-</pre>
-
-The query above mimics the result of a SPARQL query (except for the added entailments):
-
-<pre highlight="turtle">
-CONSTRUCT {
-    ?S ?P ?O .
-}
-WHERE {
-    ?S ?P ?O .
-}
-</pre>
-
-</div>
-
-<div class="example">
-Return the MyExample surface which only contains one triple:
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-
-(_:S _:P _:O) log:onQuerySurface {
-    () log:onMyExampleSurface {
-        _:S _:P _:O .
-    } .
-} .
-</pre>
-
-The query above mimics the result of a SPARQL query (except for the added entailments):
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-
-CONSTRUCT {
-    () log:onMyExampleSurface {
-        ?S ?P ?O .
-    } .
-}
-WHERE {
-    () log:onMyExampleSurface {
-        ?S ?P ?O .
-    } .
-}
-</pre>
-
-Return all triples on MyExample surfaces:
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-
-(_:G) log:onQuerySurface {
-    () log:onMyExampleSurface _:G .
-} .
-</pre>
-
-</div>
-
-<div class="example">
-Return all negative surfaces (without blank node graffiti) which contain one single triple about `http://example.org/ns#Alice`.
-
-<pre highlight="turtle">
-@prefix : &lt;http://example.org/ns#&gt; .
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
-
-(_:P _:O) log:onQuerySurface {
-    () log:onNegativeSurface {
-        :Alice _:P _:O .
-    } .
-} .
-</pre>
-
-</div>
-
-## Question and Answer Surface
+## Answer Surface
 
 Issue: TODO 
-
-## Other Surfaces ## {#OtherSurface}
-
-Issue: TODO
 
 Examples {#Examples}
 ================
@@ -866,10 +766,8 @@ Issue: TODO
 
 See:
 
-- [https://github.com/eyereasoner/eye/tree/master/reasoning/blogic](https://github.com/eyereasoner/eye/tree/master/reasoning/blogic)
-- [https://github.com/eyereasoner/Notation3-By-Example/tree/main/blogic](https://github.com/eyereasoner/Notation3-By-Example/tree/main/blogic)
-- [https://github.com/eyereasoner/Notation3-By-Example/tree/main/examples](https://github.com/eyereasoner/Notation3-By-Example/tree/main/examples)
-
+- [https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces](https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces)
+- [https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests)
 
 <pre class=biblio>
 {

@@ -6,11 +6,6 @@ in his 2009 ISWC Invited Talk: [BLOGIC](https://www.slideshare.net/PatHayes/blog
 
 See the living document [RDF Surfaces Primer](https://w3c-cg.github.io/rdfsurfaces/).
 
-### Original Examples and Test Cases
-
-- https://github.com/eyereasoner/Notation3-By-Example/tree/main/blogic
-- https://github.com/eyereasoner/eye/tree/blogic/reasoning/blogic
-
 ### Latest Examples and Test Cases
 
 - https://github.com/eyereasoner/rdfsurfaces-tests
