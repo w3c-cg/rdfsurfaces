@@ -9,4 +9,3 @@ See the living document [RDF Surfaces Primer](https://w3c-cg.github.io/rdfsurfac
 ### Latest Examples and Test Cases
 
 - https://github.com/eyereasoner/rdfsurfaces-tests
-- https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces
