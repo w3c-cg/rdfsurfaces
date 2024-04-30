@@ -1488,8 +1488,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
-  <meta content="dark light" name="color-scheme">
+  <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
+  <meta content="ef8bc403156f99e06b348dde939aa631f5559f4c" name="revision">
 <style>
 table {
   margin: 25px auto;
@@ -2044,10 +2044,11 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">RDF Surfaces Primer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2024-04-05">5 April 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2024-04-30">30 April 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
+     <dd><a href="https://github.com/w3c-cg/rdfsurfaces/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org"><a href="https://knows.idlab.ugent.be/team/">KNoWS</a></span>)
@@ -2057,7 +2058,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 5 April 2024,
+In addition, as of 30 April 2024,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2225,14 +2226,14 @@ existential quantified variable by placing it in an enclosing negative surface:<
    <p>RDF Surfaces provides a way to express the notion of <em>positive</em> and <em>negative surfaces</em> in Notation3 with help of the built-in <code>log:onNegativeSurface</code>. The <code>log:onNegativeSurface</code> built-in is equivalent to the logical NAND function ("not and"). A <code>log:onNegativeSurface</code> is true when at least one of the nested triples in the object is false. A <em>positive</em> surface can be constructed from double nested <code>log:onNegativeSurface</code> built-in. A <em>negative</em> surface can be constructed from a single <code>log:onNegativeSurface</code> built-in.</p>
    <p>The subject of both built-ins are the blank nodes that need to be put on the
 surface (so that they become existential or universal quantified variables depending on the nesting level of the surface).</p>
-   <div class="example" id="example-f0d0e6c6">
-    <a class="self-link" href="#example-f0d0e6c6"></a> <em>"Something is a city"</em> in Notation3. 
+   <div class="example" id="example-51ab59e2">
+    <a class="self-link" href="#example-51ab59e2"></a> <em>"Something is a city"</em> in Notation3. 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-  <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+  <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
   <c- p>}</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2243,67 +2244,67 @@ is defined as a positive surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+_<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
 </pre>
    </div>
-   <div class="example" id="example-aa24e825">
-    <a class="self-link" href="#example-aa24e825"></a> <em>"Everything is a city"</em> in Notation3. Notice how we can make universal or existential quantified variables by placing blank nodes on a odd or even nested surface. 
+   <div class="example" id="example-81be5796">
+    <a class="self-link" href="#example-81be5796"></a> <em>"Everything is a city"</em> in Notation3. Notice how we can make universal or existential quantified variables by placing blank nodes on a odd or even nested surface. 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
   <c- p>}</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
-   <div class="example" id="example-c2f96003">
-    <a class="self-link" href="#example-c2f96003"></a> <em>"Nothing is a problem"</em> in Notation3 . 
+   <div class="example" id="example-2a1c53c6">
+    <a class="self-link" href="#example-2a1c53c6"></a> <em>"Nothing is a problem"</em> in Notation3 . 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Problem</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Problem</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
-   <div class="example" id="example-5059dfe0">
-    <a class="self-link" href="#example-5059dfe0"></a> <em>"All cats are alive OR dead"</em> in Notation3. These are Schrödinger cats: logical OR can
+   <div class="example" id="example-3507dd11">
+    <a class="self-link" href="#example-3507dd11"></a> <em>"All cats are alive OR dead"</em> in Notation3. These are Schrödinger cats: logical OR can
 mean alive, or dead, or both alive and dead. 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>.</c->
 
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Dead</c-> <c- p>.</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Dead</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
-   <div class="example" id="example-45929b62">
-    <a class="self-link" href="#example-45929b62"></a> <em>"If any cat X is alive, then X says meow"</em> in Notation3 . 
+   <div class="example" id="example-5508fab5">
+    <a class="self-link" href="#example-5508fab5"></a> <em>"If any cat X is alive, then X says meow"</em> in Notation3 . 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>;</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>;</c->
         <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>says</c-> <c- p>:</c-><c- f>Meow</c-> <c- p>.</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>says</c-> <c- p>:</c-><c- f>Meow</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
    <p>A surface can be queried by providing a query surface with the <code>log:onNegativeAnswerSurface</code> ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.</p>
-   <div class="example" id="example-82c4ace5">
-    <a class="self-link" href="#example-82c4ace5"></a> 
+   <div class="example" id="example-85a03cf8">
+    <a class="self-link" href="#example-85a03cf8"></a> 
     <p><code>:Ghent a :City</code> is a triple on the implicit positive surface. The two nested
 negative surfaces express that for any subject <code>_:S</code> on the positive service
 that is a <code>:City</code>, it implies that <code>_:S</code> needs be be also a <code>:HumanCommunity</code>.</p>
@@ -2313,18 +2314,18 @@ that is a <code>:City</code>, it implies that <code>_:S</code> needs be be also 
 <c- nn>ex</c-><c- p>:</c-><c- f>Ghent</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
 
 <c- c># Every city is a human community</c->
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>S</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>HumanCommunity</c-><c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>S</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+        _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>HumanCommunity</c-><c- p>.</c->
     <c- p>}.</c->
 <c- p>}.</c->
 
 <c- c># Query</c->
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>.</c->
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nans</c-> <c- p>{</c->
-      <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>S</c-> _<c- p>:</c-><c- f>C</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> _<c- p>:</c-><c- f>C</c-><c- p>.</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeAnswerSurface</c-> <c- p>{</c->
+      _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> _<c- p>:</c-><c- f>C</c-><c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}.</c->
 </pre>
@@ -2393,17 +2394,17 @@ node graffiti. It is assumed that the default positive surface contains that gra
     <p>In the nested surface <code>ex:myThirdSurface</code>, the blank node in <code>_:X ex:is false</code> is a co-reference to the <code>_:X</code> blank node graffiti on <code>ex:myThirdSurface</code>. The new graffiti shields the <code>_:X</code> that was defined on <code>ex:myFirstSurface</code>: the scope of <code>_:X</code> co-references is now limited to <code>ex:myThirdSurface</code>.</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>ex:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myFirstSurface</c-> <c- p>{</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myFirstSurface</c-> <c- p>{</c->
 
     <c- nn>ex</c-><c- p>:</c-><c- f>Statement1</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>NiceStatement</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>OtherStatement</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>OtherStatement</c-> <c- p>.</c->
      
     <c- p>()</c-> <c- nn>ex</c-><c- p>:</c-><c- f>mySecondSurface</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>true</c-> <c- p>.</c-> 
-        <c- nn>_</c-><c- p>:</c-><c- f>Y</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>AnotherStatement</c-> <c- p>.</c->
+        _<c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>true</c-> <c- p>.</c-> 
+        _<c- p>:</c-><c- f>Y</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>AnotherStatement</c-> <c- p>.</c->
 
-        <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myThirdSurface</c-> <c- p>{</c->
-            <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>false</c-> <c- p>.</c->
+        <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myThirdSurface</c-> <c- p>{</c->
+            _<c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>false</c-> <c- p>.</c->
         <c- p>}</c-> <c- p>.</c->
     <c- p>}.</c->
 <c- p>}</c-> <c- p>.</c->
@@ -2413,8 +2414,8 @@ node graffiti. It is assumed that the default positive surface contains that gra
    <p>A positive surface is an RDF graph which claims that an RDF Graph on it is true.
 This is the current default interperation of <a href="https://www.w3.org/TR/rdf11-mt/">RDF Semantics</a>.
 When no surfaces are provided, an implicit positive surface is assumed in the RDF document.</p>
-   <div class="example" id="example-406b8db0">
-    <a class="self-link" href="#example-406b8db0"></a> The two surfaces below are equal (because a double negation of a statement is the same as claiming the statement is true: positive): 
+   <div class="example" id="example-27b1f9f4">
+    <a class="self-link" href="#example-27b1f9f4"></a> The two surfaces below are equal (because a double negation of a statement is the same as claiming the statement is true: positive): 
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
@@ -2424,8 +2425,8 @@ When no surfaces are provided, an implicit positive surface is assumed in the RD
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
+<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
     <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c->
@@ -2440,8 +2441,8 @@ When no surfaces are provided, an implicit positive surface is assumed in the RD
     <li data-md>
      <p>When two or more triples are placed on a positive surface, then the surface is valid when the logical conjunction of all triples is true.</p>
    </ul>
-   <div class="example" id="example-04837ca9">
-    <a class="self-link" href="#example-04837ca9"></a> The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
+   <div class="example" id="example-c5f71126">
+    <a class="self-link" href="#example-c5f71126"></a> The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
 person that knows Alice". 
     <p>As a logical statement:</p>
 <pre>:Alice a :Person AND 
@@ -2457,8 +2458,8 @@ person that knows Alice".
 <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
 <c- p>:</c-><c- f>Alice</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Bob</c-> <c- p>.</c->
 
-<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
+<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
     <c- p>:</c-><c- f>Bob</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
     <c- p>:</c-><c- f>Bob</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
@@ -2466,8 +2467,8 @@ person that knows Alice".
 </pre>
    </div>
    <p>When a blank node is marked on an even nested negative surface, then it is interpreted as an existential quantified variable in the scope of the nested surface.</p>
-   <div class="example" id="example-c301f0df">
-    <a class="self-link" href="#example-c301f0df"></a> The surface below should be interpreted as : "There is a person that knows Alice". 
+   <div class="example" id="example-b7a6456a">
+    <a class="self-link" href="#example-b7a6456a"></a> The surface below should be interpreted as : "There is a person that knows Alice". 
     <p>As a logical statement:</p>
 <pre>∃ _:X : _:X a :Person AND _:X :knows :Alice
 </pre>
@@ -2479,10 +2480,10 @@ person that knows Alice".
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-  <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+  <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2493,13 +2494,13 @@ person that knows Alice".
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+_<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+_<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 </pre>
    </div>
    <p>When a blank node is marked on an odd nested negative surface, then it is interpreted as an universal quantified variable in the scope of the nested surface.</p>
-   <div class="example" id="example-6a666d4d">
-    <a class="self-link" href="#example-6a666d4d"></a> The surface below should be interpreted as : "Every person knows Alice". 
+   <div class="example" id="example-90425235">
+    <a class="self-link" href="#example-90425235"></a> The surface below should be interpreted as : "Every person knows Alice". 
     <p>As a logical statement:</p>
 <pre>∀ _:X : _:X a :Person AND _:X :knows :Alice
 </pre>
@@ -2511,10 +2512,10 @@ person that knows Alice".
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+  <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2531,8 +2532,8 @@ intepretation of the negative surface is the negation of RDF Graph on it.</p>
     <li data-md>
      <p>When two or more triples are placed on a positive surface, then the surface is valid when the logical conjunction of all triples is false.</p>
    </ul>
-   <div class="example" id="example-a4a03935">
-    <a class="self-link" href="#example-a4a03935"></a> The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is
+   <div class="example" id="example-562ee4eb">
+    <a class="self-link" href="#example-562ee4eb"></a> The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is
 not a person that knows Alice". 
     <p>As a logical statement:</p>
 <pre>:Alice a :Person AND 
@@ -2548,7 +2549,7 @@ not a person that knows Alice".
 <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
 <c- p>:</c-><c- f>Alice</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Bob</c-> <c- p>.</c->
 
-<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
+<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
     <c- p>:</c-><c- f>Bob</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
     <c- p>:</c-><c- f>Bob</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
@@ -2556,8 +2557,8 @@ not a person that knows Alice".
    </div>
    <p>When a blank node is marked on a negative surface, then it should be interpreted as an existential
 quantified variable in the scope of the negative surface.</p>
-   <div class="example" id="example-3f9a06f8">
-    <a class="self-link" href="#example-3f9a06f8"></a> The surface below should be interpreted as "Alice is a Person and knows Bob 
+   <div class="example" id="example-0b36aace">
+    <a class="self-link" href="#example-0b36aace"></a> The surface below should be interpreted as "Alice is a Person and knows Bob 
 and there isn’t a person that knows Alice". 
     <p>As a logical statement:</p>
 <pre>:Alice a :Person AND 
@@ -2585,16 +2586,16 @@ and there isn’t a person that knows Alice".
 <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
 <c- p>:</c-><c- f>Alice</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Bob</c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
    <p>When two or more negative surfaces are nested in a parent negative surface, then it should
 be interpreted as a logical disjunction.</p>
-   <div class="example" id="example-9b498063">
-    <a class="self-link" href="#example-9b498063"></a> The surface below should be interpreted as "Alice is a Person OR Bob is a Person
+   <div class="example" id="example-240df7f2">
+    <a class="self-link" href="#example-240df7f2"></a> The surface below should be interpreted as "Alice is a Person OR Bob is a Person
 OR Charly is a person". 
     <p>As a logical statement:</p>
 <pre>:Alice a :Person OR
@@ -2615,16 +2616,16 @@ OR Charly is a person".
 <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
 <c- p>:</c-><c- f>Alice</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Bob</c-> <c- p>.</c->
 
-<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
+<c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
       <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
       <c- p>:</c-><c- f>Bob</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 
-    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>nand</c-> <c- p>{</c->
+    <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
       <c- p>:</c-><c- f>Charly</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}.</c->
