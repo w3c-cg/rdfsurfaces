@@ -2222,7 +2222,7 @@ existential quantified variable by placing it in an enclosing negative surface:<
     <p><img alt="blank surface" src="images/first_order_logic.svg" width="500"></p>
    </div>
    <p><strong>First-order logic in Notation3</strong></p>
-   <p>RDF Surfaces provides a way to express the notion of <em>positive</em> and <em>negative surfaces</em> in Notation3 with help of the built-in <code>log:nand</code>. The <code>log:nand</code> built-in is equivalent to the logical NAND function ("not and"). A <code>log:nand</code> is true when at least one of the nested triples in the object is false. A <em>positive</em> surface can be constructed from double nested <code>log:nand</code> built-in. A <em>negative</em> surface can be constructed from a single <code>log:nand</code> built-in.</p>
+   <p>RDF Surfaces provides a way to express the notion of <em>positive</em> and <em>negative surfaces</em> in Notation3 with help of the built-in <code>log:onNegativeSurface</code>. The <code>log:onNegativeSurface</code> built-in is equivalent to the logical NAND function ("not and"). A <code>log:onNegativeSurface</code> is true when at least one of the nested triples in the object is false. A <em>positive</em> surface can be constructed from double nested <code>log:onNegativeSurface</code> built-in. A <em>negative</em> surface can be constructed from a single <code>log:onNegativeSurface</code> built-in.</p>
    <p>The subject of both built-ins are the blank nodes that need to be put on the
 surface (so that they become existential or universal quantified variables depending on the nesting level of the surface).</p>
    <div class="example" id="example-f0d0e6c6">
@@ -2301,7 +2301,7 @@ mean alive, or dead, or both alive and dead.
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
-   <p>A surface can be queried by providing a query surface with the <code>log:nans</code> ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.</p>
+   <p>A surface can be queried by providing a query surface with the <code>log:onNegativeAnswerSurface</code> ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.</p>
    <div class="example" id="example-82c4ace5">
     <a class="self-link" href="#example-82c4ace5"></a> 
     <p><code>:Ghent a :City</code> is a triple on the implicit positive surface. The two nested
@@ -2373,7 +2373,7 @@ special semantics:</p>
       <td>semantics 
     <tbody>
      <tr>
-      <td><code>log:nand</code> 
+      <td><code>log:onNegativeSurface</code> 
       <td>Negative surface claim that any RDF graph in the object position is false. 
    </table>
    <p>A surface can contain zero or more other surfaces. These surfaces are then nested.

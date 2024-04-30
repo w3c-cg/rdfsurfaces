@@ -205,7 +205,7 @@ First-order logic using *positive* and *negative* surfaces.
 **First-order logic in Notation3**
 
 RDF Surfaces provides a way to express the notion of *positive* and *negative surfaces*
-in Notation3 with help of the built-in `log:nand`. The `log:nand` built-in is equivalent to the logical NAND function ("not and"). A `log:nand` is true when at least one of the nested triples in the object is false. A *positive* surface can be constructed from double nested `log:nand` built-in. A *negative* surface can be constructed from a single `log:nand` built-in.
+in Notation3 with help of the built-in `log:onNegativeSurface`. The `log:onNegativeSurface` built-in is equivalent to the logical NAND function ("not and"). A `log:onNegativeSurface` is true when at least one of the nested triples in the object is false. A *positive* surface can be constructed from double nested `log:onNegativeSurface` built-in. A *negative* surface can be constructed from a single `log:onNegativeSurface` built-in.
 
 The subject of both built-ins are the blank nodes that need to be put on the 
 surface (so that they become existential or universal quantified variables depending on the nesting level of the surface). 
@@ -217,8 +217,8 @@ surface (so that they become existential or universal quantified variables depen
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-() log:nand {
-  (_:X) log:nand {
+() log:onNegativeSurface {
+  (_:X) log:onNegativeSurface {
     _:X a :City .
   }
 } .
@@ -246,8 +246,8 @@ _:X a :City .
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:nand {
-  () log:nand {
+(_:X) log:onNegativeSurface {
+  () log:onNegativeSurface {
     _:X a :City .
   }
 } .
@@ -262,7 +262,7 @@ _:X a :City .
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:nand {
+(_:X) log:onNegativeSurface {
     _:X a :Problem .
 } .
 </pre>
@@ -277,14 +277,14 @@ mean alive, or dead, or both alive and dead.
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:nand {
+(_:X) log:onNegativeSurface {
     _:X a :Cat .
 
-    () log:nand {
+    () log:onNegativeSurface {
         _:X :is :Alive .
     } .
 
-    () log:nand {
+    () log:onNegativeSurface {
         _:X :is :Dead .
     } .
 } .
@@ -299,10 +299,10 @@ mean alive, or dead, or both alive and dead.
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:nand {
+(_:X) log:onNegativeSurface {
     _:X a :Cat ;
         :is :Alive .
-    () log:nand {
+    () log:onNegativeSurface {
         _:X :says :Meow .
     } .
 } .
@@ -310,7 +310,7 @@ mean alive, or dead, or both alive and dead.
 
 </div>
 
-A surface can be queried by providing a query surface with the `log:nans` ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.
+A surface can be queried by providing a query surface with the `log:onNegativeAnswerSurface` ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.
 
 <div class=example>
 
@@ -325,17 +325,17 @@ that is a `:City`, it implies that `_:S` needs be be also a `:HumanCommunity`.
 ex:Ghent a ex:City.
 
 # Every city is a human community
-(_:S) log:nand {
+(_:S) log:onNegativeSurface {
     _:S a ex:City.
-    () log:nand {
+    () log:onNegativeSurface {
         _:S a ex:HumanCommunity.
     }.
 }.
 
 # Query
-(_:S _:C) log:nand {
+(_:S _:C) log:onNegativeSurface {
     _:S a _:C.
-    () log:nans {
+    () log:onNegativeAnswerSurface {
       _:S a _:C.
     } .
 }.
@@ -400,7 +400,7 @@ special semantics:
  </thead>
  <tbody>
  <tr>
-  <td>`log:nand`
+  <td>`log:onNegativeSurface`
   <td>Negative surface claim that any RDF graph in the object position is false.
  </tbody>
 </table>
@@ -471,8 +471,8 @@ and
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-() log:nand {
-  () log:nand {
+() log:onNegativeSurface {
+  () log:onNegativeSurface {
     :Alice a :Person .
   } .
 }
@@ -509,8 +509,8 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-() log:nand {
-  () log:nand {
+() log:onNegativeSurface {
+  () log:onNegativeSurface {
     :Bob a :Person .
     :Bob :knows :Alice .
   } .
@@ -544,8 +544,8 @@ As RDF Surface:
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-() log:nand {
-  (_:X) log:nand {
+() log:onNegativeSurface {
+  (_:X) log:onNegativeSurface {
     _:X a :Person .
     _:X :knows :Alice .
   } .
@@ -594,8 +594,8 @@ As RDF Surface:
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:nand {
-  () log:nand {
+(_:X) log:onNegativeSurface {
+  () log:onNegativeSurface {
     _:X a :Person .
     _:X :knows :Alice .
   } .
@@ -638,7 +638,7 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-() log:nand {
+() log:onNegativeSurface {
     :Bob a :Person .
     :Bob :knows :Alice .
 } .
@@ -687,7 +687,7 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-(_:X) log:nand {
+(_:X) log:onNegativeSurface {
     _:X a :Person .
     _:X :knows :Alice .
 } .
@@ -729,16 +729,16 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-() log:nand {
-    () log:nand {
+() log:onNegativeSurface {
+    () log:onNegativeSurface {
       :Alice a :Person .
     } .
 
-    () log:nand {
+    () log:onNegativeSurface {
       :Bob a :Person .
     } .
 
-    () log:nand {
+    () log:onNegativeSurface {
       :Charly a :Person .
     } .
 }.
