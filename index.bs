@@ -310,7 +310,7 @@ mean alive, or dead, or both alive and dead.
 
 </div>
 
-A surface can be queried by providing a query surface with the `log:onNegativeAnswerSurface` ("not an answer") built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.
+A surface can be queried by providing a query surface with the `log:onNegativeAnswerSurface` built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.
 
 <div class=example>
 
