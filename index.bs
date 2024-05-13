@@ -48,14 +48,14 @@ Introduction {#Introduction}
 <img src="[LOGO]" alt="Logo" width="100" style="float: left; margin: 5px;"/>  
 
 This document presents a [Notation3](https://w3c.github.io/N3/spec/) sublanguage 
-to express a revised RDF logic as envisoned by [Pat Hayes](https://www.ihmc.us/groups/phayes/) in his 2009 ISWC Invited 
+to express a revised RDF logic as envisioned by [Pat Hayes](https://www.ihmc.us/groups/phayes/) in his 2009 ISWC Invited 
 Talk: [BLOGIC](https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk). RDF
 Surfaces logic can be thought as an implementation of [Charles Sanders Peirce](https://en.wikipedia.org/wiki/Charles_Sanders_Peirce)'s 
 [Existential Graphs](http://www.jfsowa.com/peirce/ms514.htm) in RDF.
 
 An RDF surface is a kind of a sheet of paper on which RDF graphs can be written.
 All triples that are part of an RDF graph are then on this sheet of paper, including all
-[[URI]]s, literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
+[[URIs]], literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
 A sheet of paper can contain more than one RDF graph. An RDF graph can't be split
 over multiple sheets of paper. But, one can copy an RDF graph from one sheet of 
 paper to another sheet of paper.
@@ -107,15 +107,15 @@ This means, "There is something that is a city AND There is something that is a 
 
 **Positive surface**
 
-There are special sheets of paper that can be interpreted as a logical statement.
+There are special sheets of paper that can be interpreted as logical statements.
 For instance, the sheet of paper in Example 1 is an example of a **positive surface**
-(we use in this document a paper with a black border as a positive surface). Any
+(in this document, we use a paper with a black border as a positive surface). Any
 RDF graph written on this surface is interpreted as logical assertion (true). An empty 
 sheet of positive paper is an empty claim and is treated as a logical tautology (true).
 
-When there is there is more than one RDF graph on the surface, then it is a logical conjunction (AND). 
+When there is there is more than one RDF graph on the surface, it is a logical conjunction (AND). 
 If we interpret the sheets of paper with the black border in the examples above as
-positive surfaces, then  they express:
+positive surfaces, then they express:
 
 - Example 1: true
 - Example 2: It is true that:  Ghent a City.
@@ -129,12 +129,12 @@ A positive surface is the default surface, when no other surface information is 
 
 **Negative surface**
 
-In the same way as a *positive surface* asserts a logical truth, a **negative surface**
+In the same way that a *positive surface* asserts a logical truth, a **negative surface**
 asserts a logical negation. The examples below will use a sheet of paper with a red border
 as a negative surface.
 
-An empty *negative surface* on the default positive surface expresses a logical contradicton. When there are one
-or more RDF graphs written on a *negative* surface, they mean the negation of those RDF graphs.
+An empty *negative surface* on the default positive surface expresses a logical contradiction. When one
+or more RDF graphs are written on a *negative* surface, they mean the negation of those RDF graphs.
 
 A blank node on a negative surface is interpreted as an universal quantified variable. The reason is 
 that:
@@ -164,7 +164,7 @@ A *negative surface* with one triple `[] a :City` means
 
 **Propositional logic**
 
-With combination of conjunction, by putting triples on a *positive surface*, 
+With combinations of conjunction, by putting triples on a *positive surface*, 
 and negation, by putting triples on a *negative surface*, any **compound 
 truth-functional statement** can be symbolized with positive and negative sheets
 of paper:
@@ -185,7 +185,7 @@ Propositional logic using *positive* and *negative* surfaces.
 
 **First-order logic**
 
-First-order logic can be added to the RDF surfaces by interpreting the blank node as 
+First-order logic can be added to the RDF surfaces by interpreting a blank node as 
 an existential quantified variable and using the rule that a universal quantified variable can made from an 
 existential quantified variable by placing it in an enclosing negative surface: 
 
@@ -204,14 +204,19 @@ First-order logic using *positive* and *negative* surfaces.
 
 **First-order logic in Notation3**
 
-RDF Surfaces provides a way to express the notion of *positive* and *negative surfaces*
-in Notation3 with help of the built-in `log:onNegativeSurface`. The `log:onNegativeSurface` built-in is equivalent to the logical NAND function ("not and"). A `log:onNegativeSurface` is true when at least one of the nested triples in the object is false. A *positive* surface can be constructed from double nested `log:onNegativeSurface` built-in. A *negative* surface can be constructed from a single `log:onNegativeSurface` built-in.
+RDF Surfaces provide a way to express the notion of *positive* and *negative surfaces*
+in Notation3 with help of the built-in `log:onNegativeSurface`. The `log:onNegativeSurface`
+built-in is equivalent to the logical NAND function ("not and"). A `log:onNegativeSurface`
+is true when at least one of the nested triples in the object is false. A *positive* surface
+can be constructed from double nested `log:onNegativeSurface` built-ins. A *negative* surface
+can be constructed from a single `log:onNegativeSurface` built-in.
 
-The subject of both built-ins are the blank nodes that need to be put on the 
-surface (so that they become existential or universal quantified variables depending on the nesting level of the surface). 
+The subjects of both built-ins are the blank nodes that need to be put on the
+surfaces (so that they become existential or universal quantified variables,
+depending on the nesting level of the surface). 
 
 <div class=example>
-*"Something is a city"* in Notation3. 
+*"Something is a city"* in Notation3.
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
@@ -240,7 +245,8 @@ _:X a :City .
 </div>
 
 <div class=example>
-*"Everything is a city"* in Notation3. Notice how we can make universal or existential quantified variables by placing blank nodes on a odd or even nested surface.
+*"Everything is a city"* in Notation3. Notice how we can make universal or existential
+quantified variables by placing blank nodes on an odd or even nested surface.
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
@@ -310,7 +316,9 @@ mean alive, or dead, or both alive and dead.
 
 </div>
 
-A surface can be queried by providing a query surface with the `log:onNegativeAnswerSurface` built-in. The results of this query will be the final result of the reasoning engine interpreting the surfaces.
+A surface can be queried by providing a query surface with the `log:onNegativeAnswerSurface`
+built-in. The results of this query will be the final result of the reasoning engine
+interpreting the surfaces.
 
 <div class=example>
 
@@ -341,7 +349,7 @@ ex:Ghent a ex:City.
 }.
 </pre>
 
-When this surface is executed by a reasoner the result would be:
+When this surface is executed by a reasoner, the result would be:
 
 <pre highlight="turtle">
 @prefix ex: &lt;http://example.org/ns#&gt;.
@@ -352,12 +360,13 @@ ex:Ghent a ex:HumanCommunity.
 
 </div>
 
-More test cases can be found at [https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests).
+More test cases can be found at
+[https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests).
 
 Document Conventions
 =====================
 
-Within this document, the following namespace prefix bindings to [[URI]]-s are used: 
+Within this document, the following namespace prefix bindings to [[URIs]] are used: 
 
 <table>
   <thead>
@@ -405,8 +414,8 @@ special semantics:
  </tbody>
 </table>
 
-A surface can contain zero or more other surfaces. These surfaces are then nested.
-Nested surfaces can share the same [[URI]]s and literals (by copying the data), 
+A surface can contain zero or more other surfaces. These surfaces are "nested".
+Nested surfaces can share the same [[URIs]] and literals (by copying the data), 
 but can't share blank nodes. Any blank nodes that are written inside a surface 
 (not as subject of an RDF Surface) are to be interpreted as *coreferences* to the
 blank node graffiti defined on a parent RDF Surface. If no such parent RDF Surface
@@ -426,7 +435,10 @@ reference to the `_:X` blank node graffiti on `ex:myFirstSurface`.
 The blank node `_:Y` co-reference in `ex:mySecondSurface` doesn't refer to a parent blank
 node graffiti. It is assumed that the default positive surface contains that graffiti.
 
-In the nested surface `ex:myThirdSurface`, the blank node in `_:X ex:is false` is a co-reference to the `_:X` blank node graffiti on `ex:myThirdSurface`. The new graffiti shields the `_:X` that was defined on `ex:myFirstSurface`: the scope of `_:X` co-references is now limited to `ex:myThirdSurface`.
+In the nested surface `ex:myThirdSurface`, the blank node in `_:X ex:is false` is a
+co-reference to the `_:X` blank node graffiti on `ex:myThirdSurface`. The new graffiti
+shields the `_:X` that was defined on `ex:myFirstSurface`: the scope of `_:X`
+co-references is now limited to `ex:myThirdSurface`.
 
 <pre highlight="turtle">
 @prefix ex: &lt;http://example.org/ns#&gt; .
@@ -451,12 +463,13 @@ In the nested surface `ex:myThirdSurface`, the blank node in `_:X ex:is false` i
 
 ## Positive Surface ## {#PositiveSurface}
 
-A positive surface is an RDF graph which claims that an RDF Graph on it is true.
+A positive surface is an RDF Graph which claims that an RDF Graph on it is true.
 This is the current default interperation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
 When no surfaces are provided, an implicit positive surface is assumed in the RDF document.
 
 <div class=example>
-The two surfaces below are equal (because a double negation of a statement is the same as claiming the statement is true: positive):
+The two surfaces below are equal (because a double negation of a statement is the same as
+claiming the statement is true: positive):
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
@@ -480,15 +493,15 @@ and
 
 </div>
 
-The semantics of a positive surface is interpreted as a logical truth:
+The semantics of a positive surface are interpreted as a logical truth:
 
-- An empty positive surface is a tautology 
-- When a triple is placed on a positive surface, then the surface is valid when the triple is true.
-- When two or more triples are placed on a positive surface, then the surface is valid when the logical conjunction of all triples is true.
+- An empty positive surface is a tautology.
+- When a triple is placed on a positive surface, the surface is valid when the triple is true.
+- When two or more triples are placed on a positive surface, the surface is valid when the logical conjunction of all triples is true.
 
 <div class="example">
 The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
-person that knows Alice". 
+person and knows Alice". 
 
 As a logical statement:
 
@@ -519,10 +532,11 @@ As RDF Surface:
 
 </div>
 
-When a blank node is marked on an even nested negative surface, then it is interpreted as an existential quantified variable in the scope of the nested surface.
+When a blank node is marked on an even-nested negative surface, it is interpreted
+as an existential quantified variable in the scope of the nested surface.
 
 <div class="example">
-The surface below should be interpreted as : "There is a person that knows Alice".
+The surface below should be interpreted as: "There is a person that knows Alice".
 
 As a logical statement:
 
@@ -536,7 +550,7 @@ Or, rewritten using NAND-s:
 NAND( NAND(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
 ```
 
-We make use of the logical rule that a NAND of a NAND cancels and created a positive statement.
+We make use of the logical rule that a NAND of a NAND cancels, and creates a positive statement.
 
 As RDF Surface:
 
@@ -554,7 +568,9 @@ As RDF Surface:
 
 </div>
 
-In RDF Surfaces, a default positive surface is implicitly assumed for each RDF document. On this default positive surface, all existential variables are implicitly quantified. Example 20 can be rewritten as:
+In RDF Surfaces, a default positive surface is implicitly assumed for each
+RDF document. On this default positive surface, all existential variables
+are implicitly quantified. Example 20 can be rewritten as:
 
 <div class="example">
 A default positive surface with an implicit `_:X` existential variable.
@@ -569,10 +585,11 @@ _:X :knows :Alice .
 
 </div>
 
-When a blank node is marked on an odd nested negative surface, it is interpreted as an universal quantified variable in the scope of the nested surface.
+When a blank node is marked on an odd-nested negative surface, it is interpreted
+as a universal quantified variable in the scope of the nested surface.
 
 <div class="example">
-The surface below should be interpreted as : "Every person knows Alice".
+The surface below should be interpreted as: "Every person knows Alice".
 
 As a logical statement:
 
@@ -607,17 +624,17 @@ As RDF Surface:
 ## Negative Surface ## {#NegativeSurface}
 
 A negative surface is an RDF graph which claims that an RDF Graph on it is false. The
-interpretation of the negative surface is the negation of RDF Graph on it. 
+interpretation of the negative surface is the negation of the RDF Graph on it. 
 
-The semantics of a negative surface is interpreted as a logical falsehood:
+The semantics of a negative surface are interpreted as a logical falsehood:
 
 - An empty negative surface is a contradiction.
-- When a triple is placed on a negative surface, then the surface is valid when the triple is false.
-- When two or more triples are placed on a positive surface, then the surface is valid when the logical conjunction of all triples is false.
+- When a triple is placed on a negative surface, the surface is valid when the triple is false.
+- When two or more triples are placed on a positive surface, the surface is valid when the logical conjunction of all triples is false.
 
 <div class="example">
 The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is
-not a person that knows Alice".
+not a person and does not know Alice".
 
 As a logical statement:
 
@@ -646,7 +663,7 @@ As RDF Surface:
 
 </div>
 
-When a blank node is marked on a negative surface, then it should be interpreted as an existential
+When a blank node is marked on a negative surface, it should be interpreted as an existential
 quantified variable in the scope of the negative surface. 
 
 <div class="example">
@@ -695,7 +712,7 @@ As RDF Surface:
 
 </div>
 
-When two or more negative surfaces are nested in a parent negative surface, then it should
+When two or more negative surfaces are nested in a parent negative surface, it should
 be interpreted as a logical disjunction.
 
 <div class="example">
@@ -746,7 +763,7 @@ As RDF Surface:
 
 </div>
 
-With combinations of AND and NOT other logical truth function can be built. E.g.
+Other logical truth functions can be built with combinations of AND and NOT, such as the following:
 
 - Disjunction: `P ∨ Q` : `NOT( NOT(P) AND NOT(Q))`
 - Material implication `P → Q` : `NOT( P AND NOT Q )` .
