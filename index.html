@@ -1488,8 +1488,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
-  <meta content="96ce5cf703b4ce6c0db5891c17ad1691a10226ab" name="revision">
+  <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
+  <meta content="dark light" name="color-scheme">
 <style>
 table {
   margin: 25px auto;
@@ -2044,11 +2044,10 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">RDF Surfaces Primer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2024-05-14">14 May 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2024-05-13">13 May 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
-     <dd><a href="https://github.com/w3c-cg/rdfsurfaces/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org"><a href="https://knows.idlab.ugent.be/team/">KNoWS</a></span>)
@@ -2058,7 +2057,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 14 May 2024,
+In addition, as of 13 May 2024,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2087,6 +2086,7 @@ Parts of this work may be from another specification document.  If so, those par
      <a href="#references"><span class="secno"></span> <span class="content">References</span></a>
      <ol class="toc">
       <li><a href="#normative"><span class="secno"></span> <span class="content">Normative References</span></a>
+      <li><a href="#informative"><span class="secno"></span> <span class="content">Informative References</span></a>
      </ol>
     <li><a href="#issues-index"><span class="secno"></span> <span class="content">Issues Index</span></a>
    </ol>
@@ -2099,7 +2099,7 @@ to express a revised RDF logic as envisioned by <a href="https://www.ihmc.us/gro
 Talk: <a href="https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk">BLOGIC</a>. RDF
 Surfaces logic can be thought as an implementation of <a href="https://en.wikipedia.org/wiki/Charles_Sanders_Peirce">Charles Sanders Peirce</a>'s <a href="http://www.jfsowa.com/peirce/ms514.htm">Existential Graphs</a> in RDF.</p>
    <p>An RDF surface is a kind of a sheet of paper on which RDF graphs can be written.
-All triples that are part of an RDF graph are then on this sheet of paper, including all <span>[URIs]</span>, literals and <a href="https://www.w3.org/TR/rdf11-mt/#blank-nodes">Blank nodes</a>. 
+All triples that are part of an RDF graph are then on this sheet of paper, including all <a data-link-type="biblio" href="#biblio-uri" title="Uniform Resource Identifier (URI): Generic Syntax">[URI]</a>s, literals and <a href="https://www.w3.org/TR/rdf11-mt/#blank-nodes">Blank nodes</a>. 
 A sheet of paper can contain more than one RDF graph. An RDF graph can’t be split
 over multiple sheets of paper. But, one can copy an RDF graph from one sheet of 
 paper to another sheet of paper.</p>
@@ -2234,8 +2234,8 @@ depending on the nesting level of the surface).</p>
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
 <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-  <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+  <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
   <c- p>}</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2246,7 +2246,7 @@ is defined as a positive surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-_<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
 </pre>
    </div>
    <div class="example" id="example-566d8792">
@@ -2255,9 +2255,9 @@ quantified variables by placing blank nodes on an odd or even nested surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
   <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
   <c- p>}</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2267,8 +2267,8 @@ quantified variables by placing blank nodes on an odd or even nested surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Problem</c-> <c- p>.</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Problem</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
@@ -2278,15 +2278,15 @@ mean alive, or dead, or both alive and dead.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>.</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>.</c->
 
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
+        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Dead</c-> <c- p>.</c->
+        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Dead</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2296,11 +2296,11 @@ mean alive, or dead, or both alive and dead.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>;</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>;</c->
         <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>says</c-> <c- p>:</c-><c- f>Meow</c-> <c- p>.</c->
+        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>says</c-> <c- p>:</c-><c- f>Meow</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2318,18 +2318,18 @@ that is a <code>:City</code>, it is implied that <code>_:S</code> if also a <cod
 <c- nn>ex</c-><c- p>:</c-><c- f>Ghent</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
 
 <c- c># Every city is a human community</c->
-<c- p>(</c->_<c- p>:</c-><c- f>S</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>S</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>HumanCommunity</c-><c- p>.</c->
+        <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>HumanCommunity</c-><c- p>.</c->
     <c- p>}.</c->
 <c- p>}.</c->
 
 <c- c># Query</c->
-<c- p>(</c->_<c- p>:</c-><c- f>S</c-> _<c- p>:</c-><c- f>C</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> _<c- p>:</c-><c- f>C</c-><c- p>.</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>.</c->
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeAnswerSurface</c-> <c- p>{</c->
-      _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> _<c- p>:</c-><c- f>C</c-><c- p>.</c->
+      <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}.</c->
 </pre>
@@ -2342,7 +2342,7 @@ that is a <code>:City</code>, it is implied that <code>_:S</code> if also a <cod
    </div>
    <p>More test cases can be found at <a href="https://github.com/eyereasoner/rdfsurfaces-tests">https://github.com/eyereasoner/rdfsurfaces-tests</a>.</p>
    <h2 class="heading settled" data-level="2" id="document-conventions"><span class="secno">2. </span><span class="content">Document Conventions</span><a class="self-link" href="#document-conventions"></a></h2>
-   <p>Within this document, the following namespace prefix bindings to <span>[URIs]</span> are used:</p>
+   <p>Within this document, the following namespace prefix bindings to <a data-link-type="biblio" href="#biblio-uri" title="Uniform Resource Identifier (URI): Generic Syntax">[URI]</a>s are used:</p>
    <table>
     <thead>
      <tr>
@@ -2382,7 +2382,7 @@ special semantics:</p>
       <td>Negative surface claim that any RDF graph in the object position is false. 
    </table>
    <p>A surface can contain zero or more other surfaces. These surfaces are "nested".
-Nested surfaces can share the same <span>[URIs]</span> and literals (by copying the data), 
+Nested surfaces can share the same <a data-link-type="biblio" href="#biblio-uri" title="Uniform Resource Identifier (URI): Generic Syntax">[URI]</a>s and literals (by copying the data), 
 but can’t share blank nodes. Any blank nodes that are written inside a surface 
 (not as subject of an RDF Surface) are to be interpreted as <em>coreferences</em> to the
 blank node graffiti defined on a parent RDF Surface. If no such parent RDF Surface
@@ -2400,17 +2400,17 @@ co-reference to the <code>_:X</code> blank node graffiti on <code>ex:myThirdSurf
 shields the <code>_:X</code> that was defined on <code>ex:myFirstSurface</code>: the scope of <code>_:X</code> co-references is now limited to <code>ex:myThirdSurface</code>.</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>ex:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myFirstSurface</c-> <c- p>{</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myFirstSurface</c-> <c- p>{</c->
 
     <c- nn>ex</c-><c- p>:</c-><c- f>Statement1</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>NiceStatement</c-> <c- p>.</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>OtherStatement</c-> <c- p>.</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>OtherStatement</c-> <c- p>.</c->
      
     <c- p>()</c-> <c- nn>ex</c-><c- p>:</c-><c- f>mySecondSurface</c-> <c- p>{</c->
-        _<c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>true</c-> <c- p>.</c-> 
-        _<c- p>:</c-><c- f>Y</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>AnotherStatement</c-> <c- p>.</c->
+        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>true</c-> <c- p>.</c-> 
+        <c- nn>_</c-><c- p>:</c-><c- f>Y</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>AnotherStatement</c-> <c- p>.</c->
 
-        <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myThirdSurface</c-> <c- p>{</c->
-            _<c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>false</c-> <c- p>.</c->
+        <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myThirdSurface</c-> <c- p>{</c->
+            <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>false</c-> <c- p>.</c->
         <c- p>}</c-> <c- p>.</c->
     <c- p>}.</c->
 <c- p>}</c-> <c- p>.</c->
@@ -2489,9 +2489,9 @@ as an existential quantified variable in the scope of the nested surface.</p>
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
 <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-  <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+  <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2504,8 +2504,8 @@ are implicitly quantified. Example 20 can be rewritten as:</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-_<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-_<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 </pre>
    </div>
    <p>When a blank node is marked on an odd-nested negative surface, it is interpreted
@@ -2523,10 +2523,10 @@ as a universal quantified variable in the scope of the nested surface.</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
   <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2597,9 +2597,9 @@ and there isn’t a person that knows Alice".
 <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
 <c- p>:</c-><c- f>Alice</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Bob</c-> <c- p>.</c->
 
-<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
@@ -2817,6 +2817,11 @@ OR Charly is a person".
   <dl>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
+  </dl>
+  <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
+  <dl>
+   <dt id="biblio-uri">[URI]
+   <dd>T. Berners-Lee; R. Fielding; L. Masinter. <a href="https://www.rfc-editor.org/rfc/rfc3986"><cite>Uniform Resource Identifier (URI): Generic Syntax</cite></a>. January 2005. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc3986">https://www.rfc-editor.org/rfc/rfc3986</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">

@@ -55,7 +55,7 @@ Surfaces logic can be thought as an implementation of [Charles Sanders Peirce](h
 
 An RDF surface is a kind of a sheet of paper on which RDF graphs can be written.
 All triples that are part of an RDF graph are then on this sheet of paper, including all
-[[URIs]], literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
+[[URI]]s, literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
 A sheet of paper can contain more than one RDF graph. An RDF graph can't be split
 over multiple sheets of paper. But, one can copy an RDF graph from one sheet of 
 paper to another sheet of paper.
@@ -366,7 +366,7 @@ More test cases can be found at
 Document Conventions
 =====================
 
-Within this document, the following namespace prefix bindings to [[URIs]] are used: 
+Within this document, the following namespace prefix bindings to [[URI]]s are used: 
 
 <table>
   <thead>
@@ -415,7 +415,7 @@ special semantics:
 </table>
 
 A surface can contain zero or more other surfaces. These surfaces are "nested".
-Nested surfaces can share the same [[URIs]] and literals (by copying the data), 
+Nested surfaces can share the same [[URI]]s and literals (by copying the data), 
 but can't share blank nodes. Any blank nodes that are written inside a surface 
 (not as subject of an RDF Surface) are to be interpreted as *coreferences* to the
 blank node graffiti defined on a parent RDF Surface. If no such parent RDF Surface
