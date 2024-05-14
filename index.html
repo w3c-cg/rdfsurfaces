@@ -2044,7 +2044,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">RDF Surfaces Primer</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2024-05-13">13 May 2024</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2024-05-14">14 May 2024</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -2057,7 +2057,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="warning"></div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" height="15" src="https://licensebuttons.net/p/zero/1.0/80x15.png" width="80"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 13 May 2024,
+In addition, as of 14 May 2024,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -2135,11 +2135,11 @@ two blank nodes:</p>
     <p><img alt="blank surface" src="images/city_cat.svg" width="300"></p>
    </div>
    <p><strong>Positive surface</strong></p>
-   <p>There are special sheets of paper that can be interpreted as logical statements.
+   <p>The default surface on which RDF graphs are written is called the <strong>positive surface</strong>.
 For instance, the sheet of paper in Example 1 is an example of a <strong>positive surface</strong> (in this document, we use a paper with a black border as a positive surface). Any
-RDF graph written on this surface is interpreted as logical assertion (true). An empty 
+RDF triple written on this surface is interpreted as logical assertion (true). An empty 
 sheet of positive paper is an empty claim and is treated as a logical tautology (true).</p>
-   <p>When there is there is more than one RDF graph on the surface, it is a logical conjunction (AND).
+   <p>When there is there is more than one RDF triple on the surface, it is a logical conjunction (AND).
 If we interpret the sheets of paper with the black border in the examples above as
 positive surfaces, then they express:</p>
    <ul>
@@ -2154,7 +2154,6 @@ positive surfaces, then they express:</p>
    </ul>
    <p>The <a href="https://www.w3.org/TR/rdf11-mt/#blank-nodes">blank nodes</a> need to be interpreted
 as existential quantified variables on logical paper.</p>
-   <p>A positive surface is the default surface, when no other surface information is provided.</p>
    <p><strong>Negative surface</strong></p>
    <p>In the same way that a <em>positive surface</em> asserts a logical truth, a <strong>negative surface</strong> asserts a logical negation. The examples below will use a sheet of paper with a red border
 as a negative surface.</p>
@@ -2209,8 +2208,6 @@ of paper:</p>
    <p>First-order logic can be added to the RDF surfaces by interpreting a blank node as
 an existential quantified variable and using the rule that a universal quantified variable can made from an 
 existential quantified variable by placing it in an enclosing negative surface:</p>
-<pre>∀ x : P(x) ⇔ NOT(∃ x : NOT P(x)):
-</pre>
    <ul>
     <li data-md>
      <p>A blank node on a <em>positive surface</em> references an existential quantified variable.</p>
@@ -2222,7 +2219,7 @@ existential quantified variable by placing it in an enclosing negative surface:<
     <p><img alt="blank surface" src="images/first_order_logic.svg" width="500"></p>
    </div>
    <p><strong>First-order logic in Notation3</strong></p>
-   <p>RDF Surfaces provide a way to express the notion of <em>positive</em> and <em>negative surfaces</em> in Notation3 with help of the built-in <code>log:onNegativeSurface</code>. The <code>log:onNegativeSurface</code> built-in is equivalent to the logical NAND function ("not and"). A <code>log:onNegativeSurface</code> is true when at least one of the nested triples in the object is false. A <em>positive</em> surface
+   <p>RDF Surfaces provide a way to express the notion of <em>positive</em> and <em>negative surfaces</em> in Notation3 with help of the built-in <code>log:onNegativeSurface</code>. A <code>log:onNegativeSurface</code> is true when at least one of the nested triples in the object is false. A <em>positive</em> surface
 can be constructed from double nested <code>log:onNegativeSurface</code> built-ins. A <em>negative</em> surface
 can be constructed from a single <code>log:onNegativeSurface</code> built-in.</p>
    <p>The subjects of both built-ins are the blank nodes that need to be put on the
@@ -2475,15 +2472,15 @@ person and knows Alice".
    </div>
    <p>When a blank node is marked on an even-nested negative surface, it is interpreted
 as an existential quantified variable in the scope of the nested surface.</p>
-   <div class="example" id="example-fdfd9474">
-    <a class="self-link" href="#example-fdfd9474"></a> The surface below should be interpreted as: "There is a person that knows Alice". 
+   <div class="example" id="example-b7365080">
+    <a class="self-link" href="#example-b7365080"></a> The surface below should be interpreted as: "There is a person that knows Alice". 
     <p>As a logical statement:</p>
 <pre>∃ _:X : _:X a :Person AND _:X :knows :Alice
 </pre>
-    <p>Or, rewritten using NAND-s:</p>
-<pre>NAND( NAND(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
+    <p>Or, rewritten using NOT:</p>
+<pre>NOT( NOT(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
 </pre>
-    <p>We make use of the logical rule that a NAND of a NAND cancels, and creates a positive statement.</p>
+    <p>We make use of the logical rule that a negation of a negation cancels, and creates a positive statement.</p>
     <p>As RDF Surface:</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
@@ -2510,15 +2507,15 @@ are implicitly quantified. Example 20 can be rewritten as:</p>
    </div>
    <p>When a blank node is marked on an odd-nested negative surface, it is interpreted
 as a universal quantified variable in the scope of the nested surface.</p>
-   <div class="example" id="example-5686fab8">
-    <a class="self-link" href="#example-5686fab8"></a> The surface below should be interpreted as: "Every person knows Alice". 
+   <div class="example" id="example-70dc32c1">
+    <a class="self-link" href="#example-70dc32c1"></a> The surface below should be interpreted as: "Every person knows Alice". 
     <p>As a logical statement:</p>
 <pre>∀ _:X : _:X a :Person AND _:X :knows :Alice
 </pre>
-    <p>Or, rewritten using NAND-s:</p>
-<pre>NAND( ∃ _:X : NAND(_:X a :Person AND _:X :knows :Alice) )
+    <p>Or, rewritten using NOT:</p>
+<pre>NOT( ∃ _:X : NOT(_:X a :Person AND _:X :knows :Alice) )
 </pre>
-    <p>We make here use of the local rule that <code>NAND( ∃ _:X ... )</code> is equal to <code>∀ _:X NAND( ...)</code>.</p>
+    <p>We make here use of the local rule that <code>NOT( ∃ _:X ... )</code> is equal to <code>∀ _:X NOT( ...)</code>.</p>
     <p>As RDF Surface:</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->

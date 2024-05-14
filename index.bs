@@ -107,13 +107,13 @@ This means, "There is something that is a city AND There is something that is a 
 
 **Positive surface**
 
-There are special sheets of paper that can be interpreted as logical statements.
+The default surface on which RDF graphs are written is called the **positive surface**.
 For instance, the sheet of paper in Example 1 is an example of a **positive surface**
 (in this document, we use a paper with a black border as a positive surface). Any
-RDF graph written on this surface is interpreted as logical assertion (true). An empty 
+RDF triple written on this surface is interpreted as logical assertion (true). An empty 
 sheet of positive paper is an empty claim and is treated as a logical tautology (true).
 
-When there is there is more than one RDF graph on the surface, it is a logical conjunction (AND). 
+When there is there is more than one RDF triple on the surface, it is a logical conjunction (AND). 
 If we interpret the sheets of paper with the black border in the examples above as
 positive surfaces, then they express:
 
@@ -124,8 +124,6 @@ positive surfaces, then they express:
 
 The [blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes) need to be interpreted
 as existential quantified variables on logical paper.
-
-A positive surface is the default surface, when no other surface information is provided.
 
 **Negative surface**
 
@@ -189,10 +187,6 @@ First-order logic can be added to the RDF surfaces by interpreting a blank node 
 an existential quantified variable and using the rule that a universal quantified variable can made from an 
 existential quantified variable by placing it in an enclosing negative surface: 
 
-```
-∀ x : P(x) ⇔ NOT(∃ x : NOT P(x)):
-```
-
 - A blank node on a *positive surface* references an existential quantified variable.
 - A blank node on a *negative surface* references a universal quantified variable.
 
@@ -205,8 +199,7 @@ First-order logic using *positive* and *negative* surfaces.
 **First-order logic in Notation3**
 
 RDF Surfaces provide a way to express the notion of *positive* and *negative surfaces*
-in Notation3 with help of the built-in `log:onNegativeSurface`. The `log:onNegativeSurface`
-built-in is equivalent to the logical NAND function ("not and"). A `log:onNegativeSurface`
+in Notation3 with help of the built-in `log:onNegativeSurface`. A `log:onNegativeSurface`
 is true when at least one of the nested triples in the object is false. A *positive* surface
 can be constructed from double nested `log:onNegativeSurface` built-ins. A *negative* surface
 can be constructed from a single `log:onNegativeSurface` built-in.
@@ -544,13 +537,13 @@ As a logical statement:
 ∃ _:X : _:X a :Person AND _:X :knows :Alice
 ```
 
-Or, rewritten using NAND-s:
+Or, rewritten using NOT:
 
 ```
-NAND( NAND(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
+NOT( NOT(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
 ```
 
-We make use of the logical rule that a NAND of a NAND cancels, and creates a positive statement.
+We make use of the logical rule that a negation of a negation cancels, and creates a positive statement.
 
 As RDF Surface:
 
@@ -597,13 +590,13 @@ As a logical statement:
 ∀ _:X : _:X a :Person AND _:X :knows :Alice
 ```
 
-Or, rewritten using NAND-s:
+Or, rewritten using NOT:
 
 ```
-NAND( ∃ _:X : NAND(_:X a :Person AND _:X :knows :Alice) )
+NOT( ∃ _:X : NOT(_:X a :Person AND _:X :knows :Alice) )
 ```
 
-We make here use of the local rule that `NAND( ∃ _:X ... )` is equal to `∀ _:X NAND( ...)`.
+We make here use of the local rule that `NOT( ∃ _:X ... )` is equal to `∀ _:X NOT( ...)`.
 
 As RDF Surface:
 
