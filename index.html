@@ -2098,7 +2098,7 @@ Parts of this work may be from another specification document.  If so, those par
 to express a revised RDF logic as envisioned by <a href="https://www.ihmc.us/groups/phayes/">Pat Hayes</a> in his 2009 ISWC Invited 
 Talk: <a href="https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk">BLOGIC</a>. RDF
 Surfaces logic can be thought as an implementation of <a href="https://en.wikipedia.org/wiki/Charles_Sanders_Peirce">Charles Sanders Peirce</a>'s <a href="http://www.jfsowa.com/peirce/ms514.htm">Existential Graphs</a> in RDF.</p>
-   <p>An RDF surface is a kind of a sheet of paper on which RDF graphs can be written.
+   <p>An RDF surface is a kind of sheet of paper on which RDF graphs can be written.
 All triples that are part of an RDF graph are then on this sheet of paper, including all <a data-link-type="biblio" href="#biblio-uri" title="Uniform Resource Identifier (URI): Generic Syntax">[URI]</a>s, literals and <a href="https://www.w3.org/TR/rdf11-mt/#blank-nodes">Blank nodes</a>. 
 A sheet of paper can contain more than one RDF graph. An RDF graph can’t be split
 over multiple sheets of paper. But, one can copy an RDF graph from one sheet of 
@@ -2120,9 +2120,9 @@ new scratches need to be made.</p>
     <a class="self-link" href="#example-d0eadebe"></a> A <em>positive surface</em> with one triple containing a blank node <code>[] a :City</code>, which means <em>"There is something that is a city"</em>. 
     <p><img alt="blank surface" src="images/blank_node.svg" width="300"></p>
    </div>
-   <div class="example" id="example-0a1c769e">
-    <a class="self-link" href="#example-0a1c769e"></a> Two <em>positive surfaces</em>, one with the triple <code>[] a :City</code> (which means <em>"There is something that is a city"</em>),
-and another one with the triple <code>[] a :Cat</code> (which means <em>"There is something is a cat"</em>). 
+   <div class="example" id="example-bb05b377">
+    <a class="self-link" href="#example-bb05b377"></a> Two <em>positive surfaces</em>, one with the triple <code>[] a :City</code> (which means <em>"There is something that is a city"</em>),
+and another one with the triple <code>[] a :Cat</code> (which means <em>"There is something that is a cat"</em>). 
     <p><img alt="blank surface" src="images/two_sheets.svg" width="600"></p>
     <p>One can copy these two RDFs graphs to a new surface. This will contain two graphs with
 two blank nodes:</p>
@@ -2139,7 +2139,7 @@ two blank nodes:</p>
 For instance, the sheet of paper in Example 1 is an example of a <strong>positive surface</strong> (in this document, we use a paper with a black border as a positive surface). Any
 RDF triple written on this surface is interpreted as logical assertion (true). An empty 
 sheet of positive paper is an empty claim and is treated as a logical tautology (true).</p>
-   <p>When there is there is more than one RDF triple on the surface, it is a logical conjunction (AND).
+   <p>When there is more than one RDF triple on the surface, it is a logical conjunction (AND).
 If we interpret the sheets of paper with the black border in the examples above as
 positive surfaces, then they express:</p>
    <ul>
@@ -2159,7 +2159,7 @@ as existential quantified variables on logical paper.</p>
 as a negative surface.</p>
    <p>An empty <em>negative surface</em> on the default positive surface expresses a logical contradiction. When one
 or more RDF graphs are written on a <em>negative</em> surface, they mean the negation of those RDF graphs.</p>
-   <p>A blank node on a negative surface is interpreted as an universal quantified variable. The reason is
+   <p>A blank node on a negative surface is interpreted as a universal quantified variable. The reason is
 that:</p>
 <pre>NOT(∃ x : P(x)) ⇔ ∀ x : NOT(P(x))
 </pre>
@@ -2206,7 +2206,7 @@ of paper:</p>
    </div>
    <p><strong>First-order logic</strong></p>
    <p>First-order logic can be added to the RDF surfaces by interpreting a blank node as
-an existential quantified variable and using the rule that a universal quantified variable can made from an 
+an existential quantified variable and using the rule that a universal quantified variable can be made from an 
 existential quantified variable by placing it in an enclosing negative surface:</p>
    <ul>
     <li data-md>
@@ -2364,7 +2364,7 @@ that is a <code>:City</code>, it is implied that <code>_:S</code> if also a <cod
    </table>
    <h2 class="heading settled" data-level="3" id="Surface"><span class="secno">3. </span><span class="content">Surface</span><a class="self-link" href="#Surface"></a></h2>
    <p>Surfaces are written as triples where the <code>subject</code> is a list of zero or more blank nodes.
-The <code>object</code> is a RDF graph or the <code>true</code> or <code>false</code> literal. The blank nodes in the 
+The <code>object</code> is an graph or the <code>true</code> or <code>false</code> literal. The blank nodes in the 
 subject list are treated as marks on the object RDF graph. The <code>predicate</code> specifies 
 the kind of surface. Any kind of surface may be used, but the following built-ins have 
 special semantics:</p>
@@ -2415,7 +2415,7 @@ shields the <code>_:X</code> that was defined on <code>ex:myFirstSurface</code>:
    </div>
    <h3 class="heading settled" data-level="3.1" id="PositiveSurface"><span class="secno">3.1. </span><span class="content">Positive Surface</span><a class="self-link" href="#PositiveSurface"></a></h3>
    <p>A positive surface is an RDF Graph which claims that an RDF Graph on it is true.
-This is the current default interperation of <a href="https://www.w3.org/TR/rdf11-mt/">RDF Semantics</a>.
+This is the current default interpretation of <a href="https://www.w3.org/TR/rdf11-mt/">RDF Semantics</a>.
 When no surfaces are provided, an implicit positive surface is assumed in the RDF document.</p>
    <div class="example" id="example-27b1f9f4">
     <a class="self-link" href="#example-27b1f9f4"></a> The two surfaces below are equal (because a double negation of a statement is the same as
@@ -2507,8 +2507,8 @@ are implicitly quantified. Example 20 can be rewritten as:</p>
    </div>
    <p>When a blank node is marked on an odd-nested negative surface, it is interpreted
 as a universal quantified variable in the scope of the nested surface.</p>
-   <div class="example" id="example-70dc32c1">
-    <a class="self-link" href="#example-70dc32c1"></a> The surface below should be interpreted as: "Every person knows Alice". 
+   <div class="example" id="example-c5faf4cf">
+    <a class="self-link" href="#example-c5faf4cf"></a> The surface below should be interpreted as: "Everything is a person and knows Alice". 
     <p>As a logical statement:</p>
 <pre>∀ _:X : _:X a :Person AND _:X :knows :Alice
 </pre>

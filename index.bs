@@ -53,7 +53,7 @@ Talk: [BLOGIC](https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk
 Surfaces logic can be thought as an implementation of [Charles Sanders Peirce](https://en.wikipedia.org/wiki/Charles_Sanders_Peirce)'s 
 [Existential Graphs](http://www.jfsowa.com/peirce/ms514.htm) in RDF.
 
-An RDF surface is a kind of a sheet of paper on which RDF graphs can be written.
+An RDF surface is a kind of sheet of paper on which RDF graphs can be written.
 All triples that are part of an RDF graph are then on this sheet of paper, including all
 [[URI]]s, literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
 A sheet of paper can contain more than one RDF graph. An RDF graph can't be split
@@ -86,7 +86,7 @@ A *positive surface* with one triple containing a blank node `[] a :City`, which
 
 <div class=example>
 Two *positive surfaces*, one with the triple `[] a :City` (which means *"There is something that is a city"*),
-and another one with the triple `[] a :Cat` (which means *"There is something is a cat"*). 
+and another one with the triple `[] a :Cat` (which means *"There is something that is a cat"*). 
 
 <img alt="blank surface" src="images/two_sheets.svg" width="600"/>
 
@@ -113,7 +113,7 @@ For instance, the sheet of paper in Example 1 is an example of a **positive surf
 RDF triple written on this surface is interpreted as logical assertion (true). An empty 
 sheet of positive paper is an empty claim and is treated as a logical tautology (true).
 
-When there is there is more than one RDF triple on the surface, it is a logical conjunction (AND). 
+When there is more than one RDF triple on the surface, it is a logical conjunction (AND). 
 If we interpret the sheets of paper with the black border in the examples above as
 positive surfaces, then they express:
 
@@ -134,7 +134,7 @@ as a negative surface.
 An empty *negative surface* on the default positive surface expresses a logical contradiction. When one
 or more RDF graphs are written on a *negative* surface, they mean the negation of those RDF graphs.
 
-A blank node on a negative surface is interpreted as an universal quantified variable. The reason is 
+A blank node on a negative surface is interpreted as a universal quantified variable. The reason is 
 that:
 
 ```
@@ -184,7 +184,7 @@ Propositional logic using *positive* and *negative* surfaces.
 **First-order logic**
 
 First-order logic can be added to the RDF surfaces by interpreting a blank node as 
-an existential quantified variable and using the rule that a universal quantified variable can made from an 
+an existential quantified variable and using the rule that a universal quantified variable can be made from an 
 existential quantified variable by placing it in an enclosing negative surface: 
 
 - A blank node on a *positive surface* references an existential quantified variable.
@@ -388,7 +388,7 @@ Surface {#Surface}
 ==============================
 
 Surfaces are written as triples where the `subject` is a list of zero or more blank nodes. 
-The `object` is a RDF graph or the `true` or `false` literal. The blank nodes in the 
+The `object` is an graph or the `true` or `false` literal. The blank nodes in the 
 subject list are treated as marks on the object RDF graph. The `predicate` specifies 
 the kind of surface. Any kind of surface may be used, but the following built-ins have 
 special semantics:
@@ -457,7 +457,7 @@ co-references is now limited to `ex:myThirdSurface`.
 ## Positive Surface ## {#PositiveSurface}
 
 A positive surface is an RDF Graph which claims that an RDF Graph on it is true.
-This is the current default interperation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
+This is the current default interpretation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
 When no surfaces are provided, an implicit positive surface is assumed in the RDF document.
 
 <div class=example>
@@ -582,7 +582,7 @@ When a blank node is marked on an odd-nested negative surface, it is interpreted
 as a universal quantified variable in the scope of the nested surface.
 
 <div class="example">
-The surface below should be interpreted as: "Every person knows Alice".
+The surface below should be interpreted as: "Everything is a person and knows Alice".
 
 As a logical statement:
 
