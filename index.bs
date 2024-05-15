@@ -858,17 +858,17 @@ Query for a possible path from A to Nantes.
 Combining the RDF documents from Examples 26, 27 and 28, a RDF Surfaces reasoner should give as answer:
 
 ```
-:angers :path :nantes .
-:lemans :path :nantes .
+:Angers :path :Nantes .
+:Lemans :path :Nantes .
 ```
 
-If we would remove the negative surface around `:chartes :oneway :lemans`, a RDF Surfaces reasoner should provide more answers:
+If we would remove the negative surface around `:Chartes :oneway :Lemans`, a RDF Surfaces reasoner should provide more answers:
 
 ```
-:angers :path :nantes .
-:lemans :path :nantes .
-:chartres :path :nantes .
-:paris :path :nantes .
+:Angers :path :Nantes .
+:Lemans :path :Nantes .
+:Chartres :path :Nantes .
+:Paris :path :Nantes .
 ```
 
 For more RDF Surfaces examples see:
