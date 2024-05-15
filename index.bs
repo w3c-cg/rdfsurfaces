@@ -873,7 +873,6 @@ If we would remove the negative surface around `:Chartes :oneway :Lemans`, a RDF
 
 For more RDF Surfaces examples see:
 
-- [https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces](https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces)
 - [https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests)
 
 <pre class=biblio>

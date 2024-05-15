@@ -1488,8 +1488,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version d765c696b, updated Fri Mar 8 15:58:52 2024 -0800" name="generator">
-  <meta content="dark light" name="color-scheme">
+  <meta content="Bikeshed version 4416b18d5, updated Tue Jan 2 15:52:39 2024 -0800" name="generator">
+  <meta content="eeb3ca24eec7fc625d41881836b3dcfb37fb013c" name="revision">
 <style>
 table {
   margin: 25px auto;
@@ -2048,6 +2048,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
+     <dd><a href="https://github.com/w3c-cg/rdfsurfaces/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org"><a href="https://knows.idlab.ugent.be/team/">KNoWS</a></span>)
@@ -2231,8 +2232,8 @@ depending on the nesting level of the surface).</p>
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
 <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-  <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+  <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
   <c- p>}</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2243,7 +2244,7 @@ is defined as a positive surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+_<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
 </pre>
    </div>
    <div class="example" id="example-566d8792">
@@ -2252,9 +2253,9 @@ quantified variables by placing blank nodes on an odd or even nested surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
   <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>City</c-> <c- p>.</c->
   <c- p>}</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2264,8 +2265,8 @@ quantified variables by placing blank nodes on an odd or even nested surface.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Problem</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Problem</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
@@ -2275,15 +2276,15 @@ mean alive, or dead, or both alive and dead.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>.</c->
 
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
+        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Dead</c-> <c- p>.</c->
+        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Dead</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2293,11 +2294,11 @@ mean alive, or dead, or both alive and dead.
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>;</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Cat</c-> <c- p>;</c->
         <c- p>:</c-><c- f>is</c-> <c- p>:</c-><c- f>Alive</c-> <c- p>.</c->
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>says</c-> <c- p>:</c-><c- f>Meow</c-> <c- p>.</c->
+        _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>says</c-> <c- p>:</c-><c- f>Meow</c-> <c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2315,18 +2316,18 @@ that is a <code>:City</code>, it is implied that <code>_:S</code> if also a <cod
 <c- nn>ex</c-><c- p>:</c-><c- f>Ghent</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
 
 <c- c># Every city is a human community</c->
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>S</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>S</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>City</c-><c- p>.</c->
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>HumanCommunity</c-><c- p>.</c->
+        _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>HumanCommunity</c-><c- p>.</c->
     <c- p>}.</c->
 <c- p>}.</c->
 
 <c- c># Query</c->
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>S</c-> _<c- p>:</c-><c- f>C</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> _<c- p>:</c-><c- f>C</c-><c- p>.</c->
     <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeAnswerSurface</c-> <c- p>{</c->
-      <c- nn>_</c-><c- p>:</c-><c- f>S</c-> <c- b>a</c-> <c- nn>_</c-><c- p>:</c-><c- f>C</c-><c- p>.</c->
+      _<c- p>:</c-><c- f>S</c-> <c- b>a</c-> _<c- p>:</c-><c- f>C</c-><c- p>.</c->
     <c- p>}</c-> <c- p>.</c->
 <c- p>}.</c->
 </pre>
@@ -2397,17 +2398,17 @@ co-reference to the <code>_:X</code> blank node graffiti on <code>ex:myThirdSurf
 shields the <code>_:X</code> that was defined on <code>ex:myFirstSurface</code>: the scope of <code>_:X</code> co-references is now limited to <code>ex:myThirdSurface</code>.</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>ex:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myFirstSurface</c-> <c- p>{</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myFirstSurface</c-> <c- p>{</c->
 
     <c- nn>ex</c-><c- p>:</c-><c- f>Statement1</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>NiceStatement</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>OtherStatement</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>OtherStatement</c-> <c- p>.</c->
      
     <c- p>()</c-> <c- nn>ex</c-><c- p>:</c-><c- f>mySecondSurface</c-> <c- p>{</c->
-        <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>true</c-> <c- p>.</c-> 
-        <c- nn>_</c-><c- p>:</c-><c- f>Y</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>AnotherStatement</c-> <c- p>.</c->
+        _<c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>true</c-> <c- p>.</c-> 
+        _<c- p>:</c-><c- f>Y</c-> <c- b>a</c-> <c- nn>ex</c-><c- p>:</c-><c- f>AnotherStatement</c-> <c- p>.</c->
 
-        <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myThirdSurface</c-> <c- p>{</c->
-            <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>false</c-> <c- p>.</c->
+        <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>ex</c-><c- p>:</c-><c- f>myThirdSurface</c-> <c- p>{</c->
+            _<c- p>:</c-><c- f>X</c-> <c- nn>ex</c-><c- p>:</c-><c- f>is</c-> <c- l>false</c-> <c- p>.</c->
         <c- p>}</c-> <c- p>.</c->
     <c- p>}.</c->
 <c- p>}</c-> <c- p>.</c->
@@ -2486,9 +2487,9 @@ as an existential quantified variable in the scope of the nested surface.</p>
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
 <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-  <c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+  <c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2501,8 +2502,8 @@ are implicitly quantified. Example 20 can be rewritten as:</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-<c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+_<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+_<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 </pre>
    </div>
    <p>When a blank node is marked on an odd-nested negative surface, it is interpreted
@@ -2520,10 +2521,10 @@ as a universal quantified variable in the scope of the nested surface.</p>
 <pre class="highlight"><c- k>@prefix</c-> <c- nn>:</c-> <c- g>&lt;http://example.org/ns#></c-> <c- p>.</c->
 <c- k>@prefix</c-> <c- nn>log:</c-> <c- g>&lt;http://www.w3.org/2000/10/swap/log#></c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
   <c- p>()</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
   <c- p>}</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
@@ -2593,9 +2594,9 @@ and there isn’t a person that knows Alice".
 <c- p>:</c-><c- f>Alice</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
 <c- p>:</c-><c- f>Alice</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Bob</c-> <c- p>.</c->
 
-<c- p>(</c-><c- nn>_</c-><c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
-    <c- nn>_</c-><c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
+<c- p>(</c->_<c- p>:</c-><c- f>X</c-><c- p>)</c-> <c- nn>log</c-><c- p>:</c-><c- f>onNegativeSurface</c-> <c- p>{</c->
+    _<c- p>:</c-><c- f>X</c-> <c- b>a</c-> <c- p>:</c-><c- f>Person</c-> <c- p>.</c->
+    _<c- p>:</c-><c- f>X</c-> <c- p>:</c-><c- f>knows</c-> <c- p>:</c-><c- f>Alice</c-> <c- p>.</c->
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
@@ -2731,8 +2732,6 @@ OR Charly is a person".
 </pre>
    <p>For more RDF Surfaces examples see:</p>
    <ul>
-    <li data-md>
-     <p><a href="https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces">https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces</a></p>
     <li data-md>
      <p><a href="https://github.com/eyereasoner/rdfsurfaces-tests">https://github.com/eyereasoner/rdfsurfaces-tests</a></p>
    </ul>
