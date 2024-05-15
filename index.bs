@@ -456,7 +456,7 @@ co-references is now limited to `ex:myThirdSurface`.
 
 ## Default Positive Surface ## {#PositiveSurface}
 
-The default positive surface claims that any RDF Graph placed on it is true.
+The default positive surface claims that any RDF Graph that is placed on it is true.
 This is the current interpretation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
 When no surfaces are provided in an RDF document, the implicit default positive surface is assumed.
 
@@ -616,7 +616,7 @@ As RDF Surface:
 
 ## Negative Surface ## {#NegativeSurface}
 
-A negative surface claims that any RDF Graph on it is false. The interpretation of the negative surface is the negation of the RDF Graph that is placed on it. 
+A negative surface claims that any RDF Graph that is placed on it is false. The interpretation of the negative surface is the negation of the RDF Graph that is placed on it. 
 
 The semantics of a negative surface are interpreted as a logical falsehood:
 
