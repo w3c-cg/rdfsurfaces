@@ -2076,7 +2076,7 @@ Parts of this work may be from another specification document.  If so, those par
     <li>
      <a href="#Surface"><span class="secno">3</span> <span class="content">Surface</span></a>
      <ol class="toc">
-      <li><a href="#PositiveSurface"><span class="secno">3.1</span> <span class="content">Positive Surface</span></a>
+      <li><a href="#PositiveSurface"><span class="secno">3.1</span> <span class="content">Default Positive Surface</span></a>
       <li><a href="#NegativeSurface"><span class="secno">3.2</span> <span class="content">Negative Surface</span></a>
       <li><a href="#answer-surface"><span class="secno">3.3</span> <span class="content">Answer Surface</span></a>
      </ol>
@@ -2364,7 +2364,7 @@ that is a <code>:City</code>, it is implied that <code>_:S</code> if also a <cod
    </table>
    <h2 class="heading settled" data-level="3" id="Surface"><span class="secno">3. </span><span class="content">Surface</span><a class="self-link" href="#Surface"></a></h2>
    <p>Surfaces are written as triples where the <code>subject</code> is a list of zero or more blank nodes.
-The <code>object</code> is an graph or the <code>true</code> or <code>false</code> literal. The blank nodes in the 
+The <code>object</code> is a graph term or a boolean literal. The blank nodes in the 
 subject list are treated as marks on the object RDF graph. The <code>predicate</code> specifies 
 the kind of surface. Any kind of surface may be used, but the following built-ins have 
 special semantics:</p>
@@ -2413,10 +2413,10 @@ shields the <code>_:X</code> that was defined on <code>ex:myFirstSurface</code>:
 <c- p>}</c-> <c- p>.</c->
 </pre>
    </div>
-   <h3 class="heading settled" data-level="3.1" id="PositiveSurface"><span class="secno">3.1. </span><span class="content">Positive Surface</span><a class="self-link" href="#PositiveSurface"></a></h3>
-   <p>A positive surface is an RDF Graph which claims that an RDF Graph on it is true.
-This is the current default interpretation of <a href="https://www.w3.org/TR/rdf11-mt/">RDF Semantics</a>.
-When no surfaces are provided, an implicit positive surface is assumed in the RDF document.</p>
+   <h3 class="heading settled" data-level="3.1" id="PositiveSurface"><span class="secno">3.1. </span><span class="content">Default Positive Surface</span><a class="self-link" href="#PositiveSurface"></a></h3>
+   <p>The default positive surface claims that any RDF Graph placed on it is true.
+This is the current interpretation of <a href="https://www.w3.org/TR/rdf11-mt/">RDF Semantics</a>.
+When no surfaces are provided in an RDF document, the implicit default positive surface is assumed.</p>
    <div class="example" id="example-27b1f9f4">
     <a class="self-link" href="#example-27b1f9f4"></a> The two surfaces below are equal (because a double negation of a statement is the same as
 claiming the statement is true: positive): 
@@ -2436,14 +2436,14 @@ claiming the statement is true: positive):
 <c- p>}</c->
 </pre>
    </div>
-   <p>The semantics of a positive surface are interpreted as a logical truth:</p>
+   <p>The semantics of the default positive surface are interpreted as a logical truth:</p>
    <ul>
     <li data-md>
-     <p>An empty positive surface is a tautology.</p>
+     <p>An empty RDF graph on the default positive surface is a tautology.</p>
     <li data-md>
-     <p>When a triple is placed on a positive surface, the surface is valid when the triple is true.</p>
+     <p>When a triple is placed on the defauly positive surface, the surface is valid when the triple is true.</p>
     <li data-md>
-     <p>When two or more triples are placed on a positive surface, the surface is valid when the logical conjunction of all triples is true.</p>
+     <p>When two or more triples are placed on the default positive surface, the surface is valid when the logical conjunction of all triples is true.</p>
    </ul>
    <div class="example" id="example-dcc6b417">
     <a class="self-link" href="#example-dcc6b417"></a> The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
@@ -2529,8 +2529,7 @@ as a universal quantified variable in the scope of the nested surface.</p>
 </pre>
    </div>
    <h3 class="heading settled" data-level="3.2" id="NegativeSurface"><span class="secno">3.2. </span><span class="content">Negative Surface</span><a class="self-link" href="#NegativeSurface"></a></h3>
-   <p>A negative surface is an RDF graph which claims that an RDF Graph on it is false. The
-interpretation of the negative surface is the negation of the RDF Graph on it.</p>
+   <p>A negative surface claims that any RDF Graph on it is false. The interpretation of the negative surface is the negation of the RDF Graph that is placed on it.</p>
    <p>The semantics of a negative surface are interpreted as a logical falsehood:</p>
    <ul>
     <li data-md>
@@ -2538,7 +2537,7 @@ interpretation of the negative surface is the negation of the RDF Graph on it.</
     <li data-md>
      <p>When a triple is placed on a negative surface, the surface is valid when the triple is false.</p>
     <li data-md>
-     <p>When two or more triples are placed on a positive surface, the surface is valid when the logical conjunction of all triples is false.</p>
+     <p>When two or more triples are placed on a negative surface, the surface is valid when the logical conjunction of all triples is false.</p>
    </ul>
    <div class="example" id="example-623b9e77">
     <a class="self-link" href="#example-623b9e77"></a> The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is

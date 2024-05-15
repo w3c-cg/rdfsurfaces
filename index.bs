@@ -388,7 +388,7 @@ Surface {#Surface}
 ==============================
 
 Surfaces are written as triples where the `subject` is a list of zero or more blank nodes. 
-The `object` is an graph or the `true` or `false` literal. The blank nodes in the 
+The `object` is a graph term or a boolean literal. The blank nodes in the 
 subject list are treated as marks on the object RDF graph. The `predicate` specifies 
 the kind of surface. Any kind of surface may be used, but the following built-ins have 
 special semantics:
@@ -454,11 +454,11 @@ co-references is now limited to `ex:myThirdSurface`.
 
 </div>
 
-## Positive Surface ## {#PositiveSurface}
+## Default Positive Surface ## {#PositiveSurface}
 
-A positive surface is an RDF Graph which claims that an RDF Graph on it is true.
-This is the current default interpretation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
-When no surfaces are provided, an implicit positive surface is assumed in the RDF document.
+The default positive surface claims that any RDF Graph placed on it is true.
+This is the current interpretation of [RDF Semantics](https://www.w3.org/TR/rdf11-mt/).
+When no surfaces are provided in an RDF document, the implicit default positive surface is assumed.
 
 <div class=example>
 The two surfaces below are equal (because a double negation of a statement is the same as
@@ -486,11 +486,11 @@ and
 
 </div>
 
-The semantics of a positive surface are interpreted as a logical truth:
+The semantics of the default positive surface are interpreted as a logical truth:
 
-- An empty positive surface is a tautology.
-- When a triple is placed on a positive surface, the surface is valid when the triple is true.
-- When two or more triples are placed on a positive surface, the surface is valid when the logical conjunction of all triples is true.
+- An empty RDF graph on the default positive surface is a tautology.
+- When a triple is placed on the defauly positive surface, the surface is valid when the triple is true.
+- When two or more triples are placed on the default positive surface, the surface is valid when the logical conjunction of all triples is true.
 
 <div class="example">
 The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
@@ -616,14 +616,13 @@ As RDF Surface:
 
 ## Negative Surface ## {#NegativeSurface}
 
-A negative surface is an RDF graph which claims that an RDF Graph on it is false. The
-interpretation of the negative surface is the negation of the RDF Graph on it. 
+A negative surface claims that any RDF Graph on it is false. The interpretation of the negative surface is the negation of the RDF Graph that is placed on it. 
 
 The semantics of a negative surface are interpreted as a logical falsehood:
 
 - An empty negative surface is a contradiction.
 - When a triple is placed on a negative surface, the surface is valid when the triple is false.
-- When two or more triples are placed on a positive surface, the surface is valid when the logical conjunction of all triples is false.
+- When two or more triples are placed on a negative surface, the surface is valid when the logical conjunction of all triples is false.
 
 <div class="example">
 The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is
