@@ -771,9 +771,107 @@ Issue: TODO
 Examples {#Examples}
 ================
 
-Issue: TODO
+As an illustration of RDF Surface we offer a graph traversal example. Example 26 provides information about French roads where some roads are blocked due road works. In the example we use the predicate `:oneway` to indicate that a connection is possible from one city to another. To deny this connection, we use a negative surface.
 
-See:
+<div class="example">
+Possible connections between the French cities including a blocked connection between Chartes and Lemans.
+
+```
+@prefix : <urn:example:>.
+
+:Paris :oneway :Orleans.
+:Paris :oneway :Chartres.
+:Paris :oneway :Amiens.
+:Orleans :oneway :Blois.
+:Orleans :oneway :Bourges.
+:Blois :oneway :Tours.
+:Lemans :oneway :Angers.
+:Lemans :oneway :Tours.
+:Angers :oneway :Nantes.
+
+# blocking some roads
+() log:onNegativeSurface {
+    :Chartres :oneway :Lemans.
+}.
+```
+</div>
+
+Next, we would like to provide the logic of a "path" through the French road system. We would like to share an RDF document that states: "When a the is a `:oneway` from one city to another city, then there is a `:path` between those cities". Or, expressed in a symbolic form:
+
+```
+∀ _:A,_:B : ( _:A :oneway _:B ) IMPLIES ( _:A :path _:B )
+```
+
+These paths are transitive. When there is a path from A to B and a path from B to C, then there is a path from A to C. Or, expressed in a symbolic form:
+
+```
+∀ _:A,_:B,_:C : ( ( _:A :path _:B ) AND (_:B :path _:C) ) IMPLIES ( _:A :path _:C )
+```
+
+Using the patterns for `IMPLIES` from the previous sections these logical formulas can be written as RDF Surfaces in Example 27.
+
+<div class="example">
+The RDF Surfaces of a path algorithm.
+
+```
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix : <urn:example:>.
+
+# oneway subproperty of path
+(_:A _:B) log:onNegativeSurface {
+    _:A :oneway _:B .
+    () log:onNegativeSurface {
+        _:A :path _:B .
+    } .
+} .
+
+# path transitive property
+(_:A _:B _:C) log:onNegativeSurface {
+    _:A :path _:B .
+    _:B :path _:C .
+    () log:onNegativeSurface {
+        _:A :path _:C .
+    }.
+} .
+```
+</div>
+
+Based on the RDF documents in Example 26 and 27, we can construct a query to find out which paths are possible that end in Nantes. For this we use a specialized answer surface that expresses: "If there is some path from A to Nantes, then this is an answer. This is expressed as RDF Surfaces in Example 28.
+
+<div class="example">
+Query for a possible path from A to Nantes.
+
+```
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix : <urn:example:>.
+
+(_:A) log:onNegativeSurface {
+    _:A :path :nantes .
+    () log:onNegativeAnswerSurface {
+        _:A :path :nantes .
+        :test :is :true .
+    }.
+} .
+```
+</div>
+
+Combining the RDF documents from Examples 26, 27 and 28, a RDF Surfaces reasoner should give as answer:
+
+```
+:angers :path :nantes .
+:lemans :path :nantes .
+```
+
+If we would remove the negative surface around `:chartes :oneway :lemans`, a RDF Surfaces reasoner should provide more answers:
+
+```
+:angers :path :nantes .
+:lemans :path :nantes .
+:chartres :path :nantes .
+:paris :path :nantes .
+```
+
+For more RDF Surfaces examples see:
 
 - [https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces](https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces)
 - [https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests)

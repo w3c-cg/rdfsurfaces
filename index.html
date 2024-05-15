@@ -2653,8 +2653,83 @@ OR Charly is a person".
    <h3 class="heading settled" data-level="3.3" id="answer-surface"><span class="secno">3.3. </span><span class="content">Answer Surface</span><a class="self-link" href="#answer-surface"></a></h3>
    <p class="issue" id="issue-b7b1e314"><a class="self-link" href="#issue-b7b1e314"></a> TODO</p>
    <h2 class="heading settled" data-level="4" id="Examples"><span class="secno">4. </span><span class="content">Examples</span><a class="self-link" href="#Examples"></a></h2>
-   <p class="issue" id="issue-b7b1e314①"><a class="self-link" href="#issue-b7b1e314①"></a> TODO</p>
-   <p>See:</p>
+   <p>As an illustration of RDF Surface we offer a graph traversal example. Example 26 provides information about French roads where some roads are blocked due road works. In the example we use the predicate <code>:oneway</code> to indicate that a connection is possible from one city to another. To deny this connection, we use a negative surface.</p>
+   <div class="example" id="example-584499c3">
+    <a class="self-link" href="#example-584499c3"></a> Possible connections between the French cities including a blocked connection between Chartes and Lemans. 
+<pre>@prefix : &lt;urn:example:>.
+
+:Paris :oneway :Orleans.
+:Paris :oneway :Chartres.
+:Paris :oneway :Amiens.
+:Orleans :oneway :Blois.
+:Orleans :oneway :Bourges.
+:Blois :oneway :Tours.
+:Lemans :oneway :Angers.
+:Lemans :oneway :Tours.
+:Angers :oneway :Nantes.
+
+# blocking some roads
+() log:onNegativeSurface {
+    :Chartres :oneway :Lemans.
+}.
+</pre>
+   </div>
+   <p>Next, we would like to provide the logic of a "path" through the French road system. We would like to share an RDF document that states: "When a the is a <code>:oneway</code> from one city to another city, then there is a <code>:path</code> between those cities". Or, expressed in a symbolic form:</p>
+<pre>∀ _:A,_:B : ( _:A :oneway _:B ) IMPLIES ( _:A :path _:B )
+</pre>
+   <p>These paths are transitive. When there is a path from A to B and a path from B to C, then there is a path from A to C. Or, expressed in a symbolic form:</p>
+<pre>∀ _:A,_:B,_:C : ( ( _:A :path _:B ) AND (_:B :path _:C) ) IMPLIES ( _:A :path _:C )
+</pre>
+   <p>Using the patterns for <code>IMPLIES</code> from the previous sections these logical formulas can be written as RDF Surfaces in Example 27.</p>
+   <div class="example" id="example-a55cb7b7">
+    <a class="self-link" href="#example-a55cb7b7"></a> The RDF Surfaces of a path algorithm. 
+<pre>@prefix log: &lt;http://www.w3.org/2000/10/swap/log#>.
+@prefix : &lt;urn:example:>.
+
+# oneway subproperty of path
+(_:A _:B) log:onNegativeSurface {
+    _:A :oneway _:B .
+    () log:onNegativeSurface {
+        _:A :path _:B .
+    } .
+} .
+
+# path transitive property
+(_:A _:B _:C) log:onNegativeSurface {
+    _:A :path _:B .
+    _:B :path _:C .
+    () log:onNegativeSurface {
+        _:A :path _:C .
+    }.
+} .
+</pre>
+   </div>
+   <p>Based on the RDF documents in Example 26 and 27, we can construct a query to find out which paths are possible that end in Nantes. For this we use a specialized answer surface that expresses: "If there is some path from A to Nantes, then this is an answer. This is expressed as RDF Surfaces in Example 28.</p>
+   <div class="example" id="example-5e23bfb9">
+    <a class="self-link" href="#example-5e23bfb9"></a> Query for a possible path from A to Nantes. 
+<pre>@prefix log: &lt;http://www.w3.org/2000/10/swap/log#>.
+@prefix : &lt;urn:example:>.
+
+(_:A) log:onNegativeSurface {
+    _:A :path :nantes .
+    () log:onNegativeAnswerSurface {
+        _:A :path :nantes .
+        :test :is :true .
+    }.
+} .
+</pre>
+   </div>
+   <p>Combining the RDF documents from Examples 26, 27 and 28, a RDF Surfaces reasoner should give as answer:</p>
+<pre>:angers :path :nantes .
+:lemans :path :nantes .
+</pre>
+   <p>If we would remove the negative surface around <code>:chartes :oneway :lemans</code>, a RDF Surfaces reasoner should provide more answers:</p>
+<pre>:angers :path :nantes .
+:lemans :path :nantes .
+:chartres :path :nantes .
+:paris :path :nantes .
+</pre>
+   <p>For more RDF Surfaces examples see:</p>
    <ul>
     <li data-md>
      <p><a href="https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces">https://github.com/eyereasoner/eye/tree/master/reasoning/rdfsurfaces</a></p>
@@ -2822,5 +2897,4 @@ OR Charly is a person".
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314" title="Jump to section">↵</a></div>
-   <div class="issue"> TODO <a class="issue-return" href="#issue-b7b1e314①" title="Jump to section">↵</a></div>
   </div>
