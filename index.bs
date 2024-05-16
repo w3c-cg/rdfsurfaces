@@ -4,7 +4,7 @@ Level: 1
 Status: LD
 Editor: Patrick Hochstenbach, [KNoWS](https://knows.idlab.ugent.be/team/), patrick.hochstenbach@ugent.be 
 Editor: Jos De Roo, [KNoWS](https://knows.idlab.ugent.be/team/), jos.deroo@ugent.be 
-Abstract: This document specifies a Notation3 sublanguage to express RDF Surfaces.
+Abstract: This document specifies a Notation3 sublanguage to express RDF Surfaces: RDF with first-order logic semantics.
 Markup Shorthands: markdown yes 
 Logo: images/logo.svg
 Boilerplate: 
