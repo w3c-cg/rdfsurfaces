@@ -48,20 +48,22 @@ Introduction {#Introduction}
 <img src="[LOGO]" alt="Logo" width="100" style="float: left; margin: 5px;"/>  
 
 This document presents a [Notation3](https://w3c.github.io/N3/spec/) sublanguage 
-to express a revised RDF logic as envisioned by [Pat Hayes](https://www.ihmc.us/groups/phayes/) in his 2009 ISWC Invited 
-Talk: [BLOGIC](https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk). RDF
-Surfaces logic can be thought as an implementation of [Charles Sanders Peirce](https://en.wikipedia.org/wiki/Charles_Sanders_Peirce)'s 
+to express a revised RDF logic as envisioned by [Pat Hayes](https://www.ihmc.us/groups/phayes/)
+in his 2009 ISWC Invited Talk:
+[BLOGIC](https://www.slideshare.net/PatHayes/blogic-iswc-2009-invited-talk).
+RDF Surfaces logic can be thought as an implementation of
+[Charles Sanders Peirce](https://en.wikipedia.org/wiki/Charles_Sanders_Peirce)'s 
 [Existential Graphs](http://www.jfsowa.com/peirce/ms514.htm) in RDF.
 
 An RDF surface is a kind of sheet of paper on which RDF graphs can be written.
 All triples that are part of an RDF graph are then on this sheet of paper, including all
-[[URI]]s, literals and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
+[[URI]]s, literals, and [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes). 
 A sheet of paper can contain more than one RDF graph. An RDF graph can't be split
-over multiple sheets of paper. But, one can copy an RDF graph from one sheet of 
+over multiple sheets of paper. However, one can *copy* an RDF graph from one sheet of 
 paper to another sheet of paper.
 
 [Blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes) are special. They can't 
-be copied to a new piece of paper. They can be thought of scratches on a piece of 
+be copied to a new piece of paper. They can be thought of as scratches on a piece of 
 paper. These scratches, or graffiti, are engraved into the piece of paper and can't
 be transferred. When copying data with blank nodes onto a new sheet of paper, 
 new scratches need to be made.
@@ -79,7 +81,8 @@ A *positive surface* with one triple `:Gent a :City`, which means *"Ghent is a c
 </div>
 
 <div class=example>
-A *positive surface* with one triple containing a blank node `[] a :City`, which means *"There is something that is a city"*. 
+A *positive surface* with one triple containing a blank node `[] a :City`, which
+means *"There is something that is a city"*. 
 
 <img alt="blank surface" src="images/blank_node.svg" width="300"/>
 </div>
@@ -90,7 +93,7 @@ and another one with the triple `[] a :Cat` (which means *"There is something th
 
 <img alt="blank surface" src="images/two_sheets.svg" width="600"/>
 
-One can copy these two RDFs graphs to a new surface. This will contain two graphs with 
+One can copy these two RDF graphs to a new surface. This will contain two graphs with 
 two blank nodes:
 
 <pre highlight="turtle">
@@ -107,20 +110,20 @@ This means, "There is something that is a city AND There is something that is a 
 
 **Positive surface**
 
-The default surface on which RDF graphs are written is called the **positive surface**.
-For instance, the sheet of paper in Example 1 is an example of a **positive surface**
-(in this document, we use a paper with a black border as a positive surface). Any
+The default surface on which RDF graphs are written is a **positive surface**.
+For instance, the sheet of paper in Example 1 is an example of a **positive surface**.
+(In this document, we use a paper with a black border as a positive surface.) Any
 RDF triple written on this surface is interpreted as logical assertion (true). An empty 
 sheet of positive paper is an empty claim and is treated as a logical tautology (true).
 
 When there is more than one RDF triple on the surface, it is a logical conjunction (AND). 
-If we interpret the sheets of paper with the black border in the examples above as
+If we interpret the sheets of paper with black borders in the examples above as
 positive surfaces, then they express:
 
-- Example 1: true
-- Example 2: It is true that:  Ghent a City.
-- Example 3: It is true that: ∃ x : x  a City
-- Example 4: It is true that: ∃ x , y : ( x a City ) AND ( y a Cat )
+- Example 1: true.
+- Example 2: It is true that: Ghent a City.
+- Example 3: It is true that: ∃ x : x  a City.
+- Example 4: It is true that: ∃ x , y : ( x a City ) AND ( y a Cat ).
 
 The [blank nodes](https://www.w3.org/TR/rdf11-mt/#blank-nodes) need to be interpreted
 as existential quantified variables on logical paper.
@@ -135,7 +138,7 @@ An empty *negative surface* on the default positive surface expresses a logical 
 or more RDF graphs are written on a *negative* surface, they mean the negation of those RDF graphs.
 
 A blank node on a negative surface is interpreted as a universal quantified variable. The reason is 
-that:
+as follows:
 
 ```
 NOT(∃ x : P(x)) ⇔ ∀ x : NOT(P(x))
@@ -170,10 +173,10 @@ of paper:
 - The logical conjunction **AND** is given by putting RDF triples on a *positive surface*.
 - The logical negation **NOT** is given by putting RDF triples on a *negative surface*.
 - The logical disjunction **OR** can be made by a combination of *positive* and *negative surfaces*:
-    - `NOT(P AND Q) = NOT(P) OR NOT(Q)`
-    - `NOT( NOT(P) AND NOT(Q)) = P OR Q`
+    - `NOT ( P AND Q ) = NOT ( P ) OR NOT ( Q )`
+    - `NOT ( NOT ( P ) AND NOT ( Q ) ) = P OR Q`
 - The logical implication **→** can be made with a combination of **AND** and **OR**:
-    - `P → Q = NOT(P) OR Q = NOT( P AND NOT(Q) )`
+    - `P → Q = NOT ( P ) OR Q = NOT ( P AND NOT ( Q ) )`
 
 <div class=example>
 Propositional logic using *positive* and *negative* surfaces.
@@ -184,7 +187,7 @@ Propositional logic using *positive* and *negative* surfaces.
 **First-order logic**
 
 First-order logic can be added to the RDF surfaces by interpreting a blank node as 
-an existential quantified variable and using the rule that a universal quantified variable can be made from an 
+an existential quantified variable, and using the rule that a universal quantified variable can be made from an 
 existential quantified variable by placing it in an enclosing negative surface: 
 
 - A blank node on a *positive surface* references an existential quantified variable.
@@ -200,9 +203,9 @@ First-order logic using *positive* and *negative* surfaces.
 
 RDF Surfaces provide a way to express the notion of *positive* and *negative surfaces*
 in Notation3 with help of the built-in `log:onNegativeSurface`. A `log:onNegativeSurface`
-is true when at least one of the nested triples in the object is false. A *positive* surface
-can be constructed from double nested `log:onNegativeSurface` built-ins. A *negative* surface
-can be constructed from a single `log:onNegativeSurface` built-in.
+is true when at least one of the nested triples in the object is false. A *negative* surface
+can be constructed from a single `log:onNegativeSurface` built-in. A *positive* surface
+can be constructed from double-nested `log:onNegativeSurface` built-ins.
 
 The subjects of both built-ins are the blank nodes that need to be put on the
 surfaces (so that they become existential or universal quantified variables,
@@ -225,7 +228,7 @@ depending on the nesting level of the surface).
 </div>
 
 <div class=example>
-*"Something is a city"* in Notation3 , version 2 : because the default surface 
+*"Something is a city"* in Notation3, version 2: because the default surface 
 is defined as a positive surface.
 
 <pre highlight="turtle">
@@ -238,14 +241,14 @@ _:X a :City .
 </div>
 
 <div class=example>
-*"Everything is a city"* in Notation3. Notice how we can make universal or existential
-quantified variables by placing blank nodes on an odd or even nested surface.
+*"Everything is a city"* in Notation3. Note that we can make universal or existential
+quantified variables by placing blank nodes on an oddly- or evenly-nested surface.
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+( _:X ) log:onNegativeSurface {
   () log:onNegativeSurface {
     _:X a :City .
   }
@@ -255,13 +258,13 @@ quantified variables by placing blank nodes on an odd or even nested surface.
 </div>
 
 <div class=example>
-*"Nothing is a problem"* in Notation3 .
+*"Nothing is a problem"* in Notation3.
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+( _:X ) log:onNegativeSurface {
     _:X a :Problem .
 } .
 </pre>
@@ -276,7 +279,7 @@ mean alive, or dead, or both alive and dead.
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+( _:X ) log:onNegativeSurface {
     _:X a :Cat .
 
     () log:onNegativeSurface {
@@ -292,13 +295,13 @@ mean alive, or dead, or both alive and dead.
 </div>
 
 <div class=example>
-*"If any cat X is alive, then X says meow"* in Notation3 .
+*"If any cat X is alive, then X says meow"* in Notation3.
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
-(_:X) log:onNegativeSurface {
+( _:X ) log:onNegativeSurface {
     _:X a :Cat ;
         :is :Alive .
     () log:onNegativeSurface {
@@ -310,45 +313,45 @@ mean alive, or dead, or both alive and dead.
 </div>
 
 A surface can be queried by providing a query surface with the `log:onNegativeAnswerSurface`
-built-in. The results of this query will be the final result of the reasoning engine
+built-in. The results of this query will be the final results of the reasoning engine
 interpreting the surfaces.
 
 <div class=example>
 
 `:Ghent a :City` is a triple on the implicit positive surface. The two nested
-negative surfaces express that for any subject `_:S` on the positive service
+negative surfaces express that for any subject `_:S` on the positive surface
 that is a `:City`, it is implied that `_:S` if also a `:HumanCommunity`.
 
 <pre highlight="turtle">
-@prefix ex: &lt;http://example.org/ns#&gt;.
-@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt;.
+@prefix ex: &lt;http://example.org/ns#&gt; .
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
 ex:Ghent a ex:City.
 
 # Every city is a human community
-(_:S) log:onNegativeSurface {
-    _:S a ex:City.
+( _:S ) log:onNegativeSurface {
+    _:S a ex:City .
     () log:onNegativeSurface {
-        _:S a ex:HumanCommunity.
+        _:S a ex:HumanCommunity .
     }.
 }.
 
 # Query
-(_:S _:C) log:onNegativeSurface {
-    _:S a _:C.
+( _:S _:C ) log:onNegativeSurface {
+    _:S a _:C .
     () log:onNegativeAnswerSurface {
-      _:S a _:C.
+      _:S a _:C .
     } .
-}.
+} .
 </pre>
 
 When this surface is executed by a reasoner, the result would be:
 
 <pre highlight="turtle">
-@prefix ex: &lt;http://example.org/ns#&gt;.
+@prefix ex: &lt;http://example.org/ns#&gt; .
 
-ex:Ghent a ex:City.
-ex:Ghent a ex:HumanCommunity.
+ex:Ghent a ex:City .
+ex:Ghent a ex:HumanCommunity .
 </pre>
 
 </div>
@@ -407,12 +410,12 @@ special semantics:
  </tbody>
 </table>
 
-A surface can contain zero or more other surfaces. These surfaces are "nested".
-Nested surfaces can share the same [[URI]]s and literals (by copying the data), 
+A surface can contain zero or more other surfaces. These contained surfaces are "nested".
+Nested surfaces can share the same [[URIs]] and literals (by copying the data), 
 but can't share blank nodes. Any blank nodes that are written inside a surface 
 (not as subject of an RDF Surface) are to be interpreted as *coreferences* to the
 blank node graffiti defined on a parent RDF Surface. If no such parent RDF Surface
-exists, then it is assumed that the blank node is a coreference to an implicit declared
+exists, then it is assumed that the blank node is a coreference to an implicitly declared
 blank node graffiti on the default positive surface. 
 
 </div>
@@ -436,7 +439,7 @@ co-references is now limited to `ex:myThirdSurface`.
 <pre highlight="turtle">
 @prefix ex: &lt;http://example.org/ns#&gt; .
 
-(_:X) ex:myFirstSurface {
+( _:X ) ex:myFirstSurface {
 
     ex:Statement1 a ex:NiceStatement .
     _:X a ex:OtherStatement .
@@ -445,7 +448,7 @@ co-references is now limited to `ex:myThirdSurface`.
         _:X ex:is true . 
         _:Y a ex:AnotherStatement .
 
-        (_:X) ex:myThirdSurface {
+        ( _:X ) ex:myThirdSurface {
             _:X ex:is false .
         } .
     }.
@@ -462,7 +465,7 @@ When no surfaces are provided in an RDF document, the implicit default positive 
 
 <div class=example>
 The two surfaces below are equal (because a double negation of a statement is the same as
-claiming the statement is true: positive):
+claiming the statement is true, i.e., positive):
 
 <pre highlight="turtle">
 @prefix : &lt;http://example.org/ns#&gt; .
@@ -489,8 +492,9 @@ and
 The semantics of the default positive surface are interpreted as a logical truth:
 
 - An empty RDF graph on the default positive surface is a tautology.
-- When a triple is placed on the defauly positive surface, the surface is valid when the triple is true.
-- When two or more triples are placed on the default positive surface, the surface is valid when the logical conjunction of all triples is true.
+- When a triple is placed on the default positive surface, the surface is valid when the triple is true.
+- When two or more triples are placed on the default positive surface, the surface is valid when the
+  logical conjunction of all triples is true.
 
 <div class="example">
 The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is a 
@@ -525,7 +529,7 @@ As RDF Surface:
 
 </div>
 
-When a blank node is marked on an even-nested negative surface, it is interpreted
+When a blank node is marked on an evenly-nested negative surface, it is interpreted
 as an existential quantified variable in the scope of the nested surface.
 
 <div class="example">
@@ -540,7 +544,7 @@ As a logical statement:
 Or, rewritten using NOT:
 
 ```
-NOT( NOT(∃ _:X : _:X a :Person AND _:X :knows :Alice) )
+NOT ( NOT ( ∃ _:X : _:X a :Person AND _:X :knows :Alice ) )
 ```
 
 We make use of the logical rule that a negation of a negation cancels, and creates a positive statement.
@@ -552,7 +556,7 @@ As RDF Surface:
 @prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt; .
 
 () log:onNegativeSurface {
-  (_:X) log:onNegativeSurface {
+  ( _:X ) log:onNegativeSurface {
     _:X a :Person .
     _:X :knows :Alice .
   } .
@@ -578,7 +582,7 @@ _:X :knows :Alice .
 
 </div>
 
-When a blank node is marked on an odd-nested negative surface, it is interpreted
+When a blank node is marked on an oddly-nested negative surface, it is interpreted
 as a universal quantified variable in the scope of the nested surface.
 
 <div class="example">
@@ -593,10 +597,10 @@ As a logical statement:
 Or, rewritten using NOT:
 
 ```
-NOT( ∃ _:X : NOT(_:X a :Person AND _:X :knows :Alice) )
+NOT( ∃ _:X : NOT ( _:X a :Person AND _:X :knows :Alice ) )
 ```
 
-We make here use of the local rule that `NOT( ∃ _:X ... )` is equal to `∀ _:X NOT( ...)`.
+We make here use of the logical rule that `NOT ( ∃ _:X ... )` is equal to `∀ _:X NOT ( ... )`.
 
 As RDF Surface:
 
@@ -616,16 +620,18 @@ As RDF Surface:
 
 ## Negative Surface ## {#NegativeSurface}
 
-A negative surface claims that any RDF Graph that is placed on it is false. The interpretation of the negative surface is the negation of the RDF Graph that is placed on it. 
+A negative surface claims that any RDF Graph that is placed on it is false. The interpretation of the
+negative surface is the negation of the RDF Graph that is placed on it. 
 
 The semantics of a negative surface are interpreted as a logical falsehood:
 
 - An empty negative surface is a contradiction.
 - When a triple is placed on a negative surface, the surface is valid when the triple is false.
-- When two or more triples are placed on a negative surface, the surface is valid when the logical conjunction of all triples is false.
+- When two or more triples are placed on a negative surface, the surface is valid when the logical
+  conjunction of all triples is false.
 
 <div class="example">
-The surface below should be interpreted as: "Alice is a person and knows Bob and Bob is
+The surface below should be interpreted as: "Alice is a person and knows Bob, and Bob is
 not a person and does not know Alice".
 
 As a logical statement:
@@ -659,7 +665,7 @@ When a blank node is marked on a negative surface, it should be interpreted as a
 quantified variable in the scope of the negative surface. 
 
 <div class="example">
-The surface below should be interpreted as "Alice is a Person and knows Bob 
+The surface below should be interpreted as "Alice is a Person and knows Bob, 
 and there isn't a person that knows Alice".
 
 As a logical statement:
@@ -696,7 +702,7 @@ As RDF Surface:
 :Alice a :Person .
 :Alice :knows :Bob .
 
-(_:X) log:onNegativeSurface {
+( _:X ) log:onNegativeSurface {
     _:X a :Person .
     _:X :knows :Alice .
 } .
@@ -722,10 +728,10 @@ As a logical statement:
 which is the same as:
 
 ```
-  NOT(
-    NOT(:Alice a :Person) AND
-    NOT(:Bob a :Person) AND
-    NOT(:Charly a :Person)
+  NOT (
+    NOT ( :Alice a :Person ) AND
+    NOT ( :Bob a :Person ) AND
+    NOT ( :Charly a :Person )
   )
 ```
 
@@ -755,14 +761,14 @@ As RDF Surface:
 
 </div>
 
-Other logical truth functions can be built with combinations of AND and NOT, such as the following:
+Other logical truth functions can be built with combinations of `AND` and `NOT`, such as the following:
 
-- Disjunction: `P ∨ Q` : `NOT( NOT(P) AND NOT(Q))`
-- Material implication `P → Q` : `NOT( P AND NOT Q )` .
-- Converse implication `P ← Q` : `NOT( NOT(P) AND Q )` .
-- Biconditional `(P → Q) ∧ (Q → P)` : `NOT( P AND NOT Q ) AND NOT( Q AND NOT P )`
+- Disjunction: `P ∨ Q` : `NOT ( NOT ( P ) AND NOT ( Q ) )`
+- Material implication `P → Q` : `NOT ( P AND NOT Q )` .
+- Converse implication `P ← Q` : `NOT ( NOT ( P ) AND Q )` .
+- Biconditional `(P → Q) ∧ (Q → P)` : `NOT ( P AND NOT Q ) AND NOT ( Q AND NOT P )`
 
-Negative surfaces should also follow the law of double negation elimination: `P = NOT(NOT(P))`.
+Negative surfaces should also follow the law of double negation elimination: `P = NOT ( NOT ( P ) )`.
 
 ## Answer Surface
 
@@ -771,54 +777,61 @@ Issue: TODO
 Examples {#Examples}
 ================
 
-As an illustration of RDF Surface we offer a graph traversal example. Example 26 provides information about French roads where some roads are blocked due road works. In the example we use the predicate `:oneway` to indicate that a connection is possible from one city to another. To deny this connection, we use a negative surface.
+As an illustration of RDF Surface, we offer a graph traversal example. Example 26 provides information
+about French roads where some roads are blocked due to road works. In this example, we use the predicate
+`:oneway` to indicate that a connection is possible from one city to another. To deny this connection,
+we use a negative surface.
 
 <div class="example">
 Possible connections between the French cities including a blocked connection between Chartes and Lemans.
 
 ```
-@prefix : <urn:example:>.
+@prefix : <urn:example:> .
 
-:Paris :oneway :Orleans.
-:Paris :oneway :Chartres.
-:Paris :oneway :Amiens.
-:Orleans :oneway :Blois.
-:Orleans :oneway :Bourges.
-:Blois :oneway :Tours.
-:Lemans :oneway :Angers.
-:Lemans :oneway :Tours.
-:Angers :oneway :Nantes.
+:Paris :oneway :Orleans .
+:Paris :oneway :Chartres .
+:Paris :oneway :Amiens .
+:Orleans :oneway :Blois .
+:Orleans :oneway :Bourges .
+:Blois :oneway :Tours .
+:Lemans :oneway :Angers .
+:Lemans :oneway :Tours .
+:Angers :oneway :Nantes .
 
 # blocking some roads
 () log:onNegativeSurface {
-    :Chartres :oneway :Lemans.
+    :Chartres :oneway :Lemans .
 }.
 ```
 </div>
 
-Next, we would like to provide the logic of a "path" through the French road system. We would like to share an RDF document that states: "When a the is a `:oneway` from one city to another city, then there is a `:path` between those cities". Or, expressed in a symbolic form:
+Next, we would like to provide the logic of a "path" through the French road system. We would
+like to share an RDF document that states: "When there is a `:oneway` from one city to another
+city, then there is a `:path` from the first to the second". Or, expressed in a symbolic form:
 
 ```
-∀ _:A,_:B : ( _:A :oneway _:B ) IMPLIES ( _:A :path _:B )
+∀ _:A, _:B : ( _:A :oneway _:B ) IMPLIES ( _:A :path _:B )
 ```
 
-These paths are transitive. When there is a path from A to B and a path from B to C, then there is a path from A to C. Or, expressed in a symbolic form:
+These paths are transitive. When there is a path from A to B and a path from B to C, there
+is a path from A to C. Or, expressed in a symbolic form:
 
 ```
-∀ _:A,_:B,_:C : ( ( _:A :path _:B ) AND (_:B :path _:C) ) IMPLIES ( _:A :path _:C )
+∀ _:A, _:B, _:C : ( ( _:A :path _:B ) AND ( _:B :path _:C ) ) IMPLIES ( _:A :path _:C )
 ```
 
-Using the patterns for `IMPLIES` from the previous sections these logical formulas can be written as RDF Surfaces in Example 27.
+Using the patterns for `IMPLIES` from the previous sections these logical formulas can be written
+as RDF Surfaces in Example 27.
 
 <div class="example">
 The RDF Surfaces of a path algorithm.
 
 ```
-@prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix : <urn:example:>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix : <urn:example:> .
 
 # oneway subproperty of path
-(_:A _:B) log:onNegativeSurface {
+( _:A _:B ) log:onNegativeSurface {
     _:A :oneway _:B .
     () log:onNegativeSurface {
         _:A :path _:B .
@@ -826,43 +839,46 @@ The RDF Surfaces of a path algorithm.
 } .
 
 # path transitive property
-(_:A _:B _:C) log:onNegativeSurface {
+( _:A _:B _:C ) log:onNegativeSurface {
     _:A :path _:B .
     _:B :path _:C .
     () log:onNegativeSurface {
         _:A :path _:C .
-    }.
+    } .
 } .
 ```
 </div>
 
-Based on the RDF documents in Example 26 and 27, we can construct a query to find out which paths are possible that end in Nantes. For this we use a specialized answer surface that expresses: "If there is some path from A to Nantes, then this is an answer. This is expressed as RDF Surfaces in Example 28.
+Based on the RDF documents in Example 26 and 27, we can construct a query to find out which paths are
+possible that end in Nantes. For this, we use a specialized answer surface that expresses: "If there is
+some path from A to Nantes, then this is an answer". This is expressed as RDF Surfaces in Example 28.
 
 <div class="example">
 Query for a possible path from A to Nantes.
 
 ```
-@prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix : <urn:example:>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix : <urn:example:> .
 
 (_:A) log:onNegativeSurface {
     _:A :path :nantes .
     () log:onNegativeAnswerSurface {
         _:A :path :nantes .
         :test :is :true .
-    }.
+    } .
 } .
 ```
 </div>
 
-Combining the RDF documents from Examples 26, 27 and 28, a RDF Surfaces reasoner should give as answer:
+Combining the RDF documents from Examples 26, 27, and 28, an RDF Surfaces reasoner should give as answers:
 
 ```
 :Angers :path :Nantes .
 :Lemans :path :Nantes .
 ```
 
-If we would remove the negative surface around `:Chartes :oneway :Lemans`, a RDF Surfaces reasoner should provide more answers:
+If we remove the negative surface around `:Chartes :oneway :Lemans`, an RDF Surfaces reasoner
+should provide more answers:
 
 ```
 :Angers :path :Nantes .
@@ -871,7 +887,7 @@ If we would remove the negative surface around `:Chartes :oneway :Lemans`, a RDF
 :Paris :path :Nantes .
 ```
 
-For more RDF Surfaces examples see:
+For more RDF Surfaces examples, see:
 
 - [https://github.com/eyereasoner/rdfsurfaces-tests](https://github.com/eyereasoner/rdfsurfaces-tests)
 
