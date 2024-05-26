@@ -3,7 +3,7 @@
 # -----------------------
 
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix : <urn:example:>.
+@prefix : <https://example.org/ns#> .
 
 # patient Ann
 :Ann :has :Fever.
@@ -67,16 +67,5 @@
     }.
     () log:onNegativeSurface {
         _:WHO :isPrescribed :betaBlocker.
-    }.
-}.
-
-# query
-() log:onNegativeSurface {
-    :Ann :isPrescribed :aspirinHighDose.
-    :Joe :isPrescribed :betaBlocker.
-    () log:onNegativeAnswerSurface {
-        :Ann :isPrescribed :aspirinHighDose.
-        :Joe :isPrescribed :betaBlocker.
-        :test :is true.
     }.
 }.
