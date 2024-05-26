@@ -1,0 +1,82 @@
+# -----------------------
+# Medication prescription
+# -----------------------
+
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+@prefix : <urn:example:>.
+
+# patient Ann
+:Ann :has :Fever.
+
+() log:onNegativeSurface {
+    :Ann :has :AllergyForAspirin.
+}.
+
+() log:onNegativeSurface {
+    :Ann :has :ActivePepticUlcerDisease.
+}.
+
+# patient Joe
+:Joe :has :AcuteMyocardialInfarction.
+:Joe :has :AllergyForAspirin.
+
+() log:onNegativeSurface {
+    :Joe :has :ActivePepticUlcerDisease.
+}.
+() log:onNegativeSurface {
+    :Joe :has :SevereAsthma.
+}.
+() log:onNegativeSurface {
+    :Joe :has :ChronicObstructivePulmonaryDisease.
+}.
+
+# medication prescription logic
+(_:WHO) log:onNegativeSurface {
+    _:WHO :has :Fever.
+    () log:onNegativeSurface {
+        _:WHO :has :AllergyForAspirin.
+    }.
+    () log:onNegativeSurface {
+        _:WHO :has :ActivePepticUlcerDisease.
+    }.
+    () log:onNegativeSurface {
+        _:WHO :isPrescribed :aspirinHighDose.
+    }.
+}.
+
+(_:WHO) log:onNegativeSurface {
+    _:WHO :has :AcuteMyocardialInfarction.
+    () log:onNegativeSurface {
+        _:WHO :has :AllergyForAspirin.
+    }.
+    () log:onNegativeSurface {
+        _:WHO :has :ActivePepticUlcerDisease.
+    }.
+    () log:onNegativeSurface {
+        _:WHO :isPrescribed :aspirinLowDose.
+    }.
+}.
+
+(_:WHO) log:onNegativeSurface {
+    _:WHO :has :AcuteMyocardialInfarction.
+    () log:onNegativeSurface {
+        _:WHO :has :SevereAsthma.
+    }.
+    () log:onNegativeSurface {
+        _:WHO :has :ChronicObstructivePulmonaryDisease.
+    }.
+    () log:onNegativeSurface {
+        _:WHO :isPrescribed :betaBlocker.
+    }.
+}.
+
+# query
+() log:onNegativeSurface {
+    :Ann :isPrescribed :aspirinHighDose.
+    :Joe :isPrescribed :betaBlocker.
+    () log:onNegativeAnswerSurface {
+        :Ann :isPrescribed :aspirinHighDose.
+        :Joe :isPrescribed :betaBlocker.
+        :test :is true.
+    }.
+}.
