@@ -47,7 +47,7 @@
    :WOS :indexed _:J .
 
    () log:onNegativeSurface {
-      _:J a :InstitutePreference .
+      _:J a :DepartmentPreference .
    } .
 } .
 
@@ -81,6 +81,6 @@
 # Test
 
 () log:onNegativeSurface {
-    :ABC a :InstitutePreference .
+    :ABC a :DepartmentPreference .
     :ABC a :ResearcherPreference .
 } .
