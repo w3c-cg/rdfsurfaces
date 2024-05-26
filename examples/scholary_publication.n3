@@ -1,0 +1,86 @@
+@prefix : <https://example.org/ns#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+##############################################################################
+# Researcher preferences                                                     #
+##############################################################################
+
+## Pref 1 . Publications in a subject repo
+(_:R) log:onNegativeSurface {
+  _:R a :SubjectRepository .
+
+  () log:onNegativeSurface {
+    _:R a :ResearcherPreference.
+  } .
+} .
+
+## Pref 2 . Publications by a journal that doesn't charge APC costs
+(_:J) log:onNegativeSurface {
+    _:J a :Journal .
+
+    () log:onNegativeSurface {
+        _:J :charges :APC .
+    } .
+
+    () log:onNegativeSurface {
+        _:J a :ResearcherPreference.
+    } .
+} .
+
+## Pref 3 . Publications by a publisher that is in WOS
+(_:J) log:onNegativeSurface {
+   _:J a :Journal .
+   :WOS :indexed _:J .
+
+   () log:onNegativeSurface {
+        _:J a :ResearcherPreference.
+   } .
+}.
+
+##############################################################################
+# Institute preferences                                                      #
+##############################################################################
+
+## Pref 1 . Only journals that are indexed in WOS
+(_:J) log:onNegativeSurface {
+   _:J a :Journal .
+   :WOS :indexed _:J .
+
+   () log:onNegativeSurface {
+      _:J a :InstitutePreference .
+   } .
+} .
+
+##############################################################################
+# Journal preferences                                                        #
+##############################################################################
+
+## Journal facts
+:ABC a :Journal .
+:DEF a :Journal .
+:GHI a :Journal .
+
+# APC facts
+:ABC :charges :APC .
+
+## GHI is a journal that does not require APC costs
+() log:onNegativeSurface {
+    :GHI :charges :APC .
+} .
+
+# WOS Facts
+:WOS :indexed :ABC , :DEF .
+
+() log:onNegativeSurface {
+    :WOS :indexed :GHI .
+} .
+
+## JKL is a subject repository
+:JKL a :SubjectRepository .
+
+# Test
+
+() log:onNegativeSurface {
+    :ABC a :InstitutePreference .
+    :ABC a :ResearcherPreference .
+} .
