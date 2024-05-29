@@ -7,11 +7,84 @@
     <title>RDF Surfaces Reasoner</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="https://w3c-cg.github.io/rdfsurfaces/demonstrator/assets/index.9cd46a95.js"></script>
-  <link rel="stylesheet" href="https://w3c-cg.github.io/rdfsurfaces/demonstrator/assets/index.e4a4558c.css">
+  <script type="module" crossorigin src="https://w3c-cg.github.io/rdfsurfaces/demonstrator/assets/index.bb3a4e6a.js"></script>
+  <link rel="stylesheet" href="https://w3c-cg.github.io/rdfsurfaces/demonstrator/assets/index.14ec593c.css">
 </head>
 <body>
 <div id="app"></div>
 
+<div class="container">
+    <h2>Example</h2>
+    
+    <h4>RDFS subClassOf</h4>
+
+    <p>
+        In RDFS the property <tt>rdfs:subClassOf</tt> is used to state that all the instances of one class are instances of another. In RDF Surfaces, we use simple RDF entailment where this type of entailments must be stated explicitly.
+
+        The RDF Surfaces graph below states that every City is a Human Community:
+    </p>
+
+        <pre>
+# RDF Surfaces translation of:
+#  ¬(∃ x: &lt;x rdf:type :City&gt; ∧ ¬(&lt;x rdf:type :HumanCommunity&gt;)) 
+# which is equivalent to
+#  ∀ x: &lt;x rdf:type :City&gt; → &lt;x rdf:type :HumanCommunity&gt;
+(_:x) log:onNegativeSurface {
+    _:x rdf:type :City .
+
+    () log:onNegativeSurface {
+        _:x rdf:type :HumanCommunity .
+    } .
+} .
+        </pre>
+
+    <p>
+        We can consult RDF Surfaces graphs by adding some sample data and include a query:
+    </p>
+
+        <pre>
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt;.
+@prefix : &lt;http://example.org/#&gt;.
+
+# City is a subclass of HumanCommunity
+(_:x) log:onNegativeSurface {
+    _:x rdf:type :City .
+
+    () log:onNegativeSurface {
+        _:x rdf:type :HumanCommunity .
+    } .
+} .
+
+# Sample data
+:Jakarta a :City.
+
+# Query
+(_:x _:y) log:onNegativeSurface {
+    _:x rdf:type _:y .
+
+    () log:onNegativeAnswerSurface {
+        _:x rdf:type _:y .
+    } .
+} .
+        </pre>
+    </p>
+
+    <p>
+        Executing this document using the RDF Surfaces Reasoner should give as result:
+    </p>
+
+    <pre>
+@prefix : &lt;http://example.org/#&gt;.
+
+:Jakarta a :City.
+:Jakarta a :HumanCommunity. 
+    </pre>
+
+    <h4>Acknowledgements</h4>
+    <p>
+        The reasoner is based on the Jos De Roo's <a href="https://github.com/eyereasoner/eye">eye</a> provided as a web application by Jesse Wright's <a href="https://www.npmjs.com/package/eyereasoner">eyereasoner</a>. RDF Reasoner app is based on Ieben Smessaert's <a href="https://github.com/smessie/reasoner-app">reasoner-app</a> in an <a href="https://github.com/phochste/reasoner-app/tree/pr/limited-features">adapted version</a>.
+    </p>
+</div>
 </body>
 </html>
