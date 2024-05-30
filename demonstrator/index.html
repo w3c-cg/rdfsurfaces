@@ -39,7 +39,7 @@
         </pre>
 
     <p>
-        We can consult RDF Surfaces graphs by adding some sample data and include a query:
+        We can consult RDF Surfaces graphs by adding some sample data and include a query surface (an eye specific method to query a knowledge graph):
     </p>
 
         <pre>
@@ -60,12 +60,8 @@
 :Jakarta a :City.
 
 # Query
-(_:x _:y) log:onNegativeSurface {
+(_:x _:y) log:onQuerySurface {
     _:x rdf:type _:y .
-
-    () log:onNegativeAnswerSurface {
-        _:x rdf:type _:y .
-    } .
 } .
         </pre>
     </p>
