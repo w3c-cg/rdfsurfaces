@@ -71,7 +71,7 @@ triples
 	;
 
 surface 
-	: collection verb formula
+	: graffiti verb formula
 	;
 
 graffiti

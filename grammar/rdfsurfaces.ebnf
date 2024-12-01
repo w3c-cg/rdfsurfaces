@@ -1,4 +1,4 @@
-/* converted on Sun Dec 1, 2024, 13:06 (UTC+01) by antlr_4-to-w3c v0.67 which is Copyright (c) 2011-2024 by Gunther Rademacher <grd@gmx.net> */
+/* converted on Sun Dec 1, 2024, 13:07 (UTC+01) by antlr_4-to-w3c v0.67 which is Copyright (c) 2011-2024 by Gunther Rademacher <grd@gmx.net> */
 
 n3sDoc   ::= statement* EOF
 statement
@@ -18,7 +18,7 @@ sparqlPrefix
 triples  ::= subject predicateObjectList
            | blankNodePropertyList predicateObjectList?
            | surface
-surface  ::= collection verb formula
+surface  ::= graffiti verb formula
 graffiti ::= '(' BlankNode* ')'
 predicateObjectList
          ::= verb objectList ( ';' ( verb objectList )? )*
