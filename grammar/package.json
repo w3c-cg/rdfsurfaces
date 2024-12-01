@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "scripts": {
+    "make:parser": "antlr -Dlanguage=JavaScript rdfsurfaces.g4" ,
+    "make:ebnf": "java -jar ebnf-convert.war rdfsurfaces.g4  > rdfsurfaces.ebnf" ,
+    "build": "npm run make:parser ; npm run make:ebnf"
+  },
+  "dependencies": {
+    "antlr4": "^4.13.2"
+  }
+}
