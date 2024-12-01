@@ -71,7 +71,7 @@ triples
 	;
 
 surface 
-	: graffiti verb formula
+	: graffiti predicate formula
 	;
 
 graffiti
