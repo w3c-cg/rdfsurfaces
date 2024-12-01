@@ -1,7 +1,6 @@
-/* converted on Sun Dec 1, 2024, 11:15 (UTC+01) by antlr_4-to-w3c v0.67 which is Copyright (c) 2011-2024 by Gunther Rademacher <grd@gmx.net> */
+/* converted on Sun Dec 1, 2024, 13:06 (UTC+01) by antlr_4-to-w3c v0.67 which is Copyright (c) 2011-2024 by Gunther Rademacher <grd@gmx.net> */
 
-rdfsurfacesDoc
-         ::= statement* EOF
+n3sDoc   ::= statement* EOF
 statement
          ::= directive
            | triples '.'
@@ -18,6 +17,9 @@ sparqlPrefix
          ::= PREFIX PNAME_NS IRIREF
 triples  ::= subject predicateObjectList
            | blankNodePropertyList predicateObjectList?
+           | surface
+surface  ::= collection verb formula
+graffiti ::= '(' BlankNode* ')'
 predicateObjectList
          ::= verb objectList ( ';' ( verb objectList )? )*
 objectList
@@ -34,7 +36,6 @@ object   ::= iri
            | collection
            | blankNodePropertyList
            | literal
-           | formula
 literal  ::= rdfLiteral
            | NumericLiteral
            | BooleanLiteral
