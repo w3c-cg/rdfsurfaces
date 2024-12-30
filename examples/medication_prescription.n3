@@ -40,7 +40,7 @@
         _:WHO :has :ActivePepticUlcerDisease.
     }.
     () log:onNegativeSurface {
-        _:WHO :isPrescribed :aspirinLowDose.
+        _:WHO :isPrescribed :aspirinHighDose.
     }.
 }.
 
@@ -53,7 +53,7 @@
         _:WHO :has :ActivePepticUlcerDisease.
     }.
     () log:onNegativeSurface {
-        _:WHO :isPrescribed :aspirinLowDose.
+        _:WHO :isPrescribed :aspirinHighDose.
     }.
 }.
 
@@ -72,6 +72,6 @@
 
 # query
 () log:onNegativeSurface {
-   :Ann :isPrescribed :aspirinLowDose .
+   :Ann :isPrescribed :aspirinHighDose .
    :Joe :isPrescribed :betaBlocker .
 } .
