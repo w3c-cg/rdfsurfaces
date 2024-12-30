@@ -69,3 +69,9 @@
         _:WHO :isPrescribed :betaBlocker.
     }.
 }.
+
+# query
+() log:onNegativeSurface {
+   :Ann :isPrescribed :aspirinLowDose .
+   :Joe :isPrescribed :betaBlocker .
+} .
